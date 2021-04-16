@@ -12,6 +12,7 @@ public class Courier {
 	
 	private LocalDate initiatedDate;
 	private LocalDate deliveredDate;
+
 	public Courier() {
 		super();
 		// TODO Auto-generated constructor stub

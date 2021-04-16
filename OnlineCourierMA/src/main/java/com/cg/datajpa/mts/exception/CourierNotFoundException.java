@@ -1,4 +1,4 @@
-package com.cg.mts.exception;
+package com.cg.datajpa.mts.exception;
 
 public class CourierNotFoundException extends Exception {
 

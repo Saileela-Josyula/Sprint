@@ -1,9 +1,9 @@
-package com.cg.mts.repository;
+package com.cg.datajpa.mts.repository;
 
 import java.util.List;
 
-import com.cg.mts.entities.CourierOfficeOutlet;
-import com.cg.mts.exception.OutletNotFoundException;
+import com.cg.datajpa.mts.entities.CourierOfficeOutlet;
+import com.cg.datajpa.mts.exception.OutletNotFoundException;
 
 public interface IOfficeOutletDao {
 

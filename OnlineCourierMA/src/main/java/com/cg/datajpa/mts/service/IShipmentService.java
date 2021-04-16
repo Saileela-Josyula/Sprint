@@ -1,6 +1,6 @@
-package com.cg.mts.service;
+package com.cg.datajpa.mts.service;
 
-import com.cg.mts.entities.Courier;
+import com.cg.datajpa.mts.entities.Courier;
 
 public interface IShipmentService {
 

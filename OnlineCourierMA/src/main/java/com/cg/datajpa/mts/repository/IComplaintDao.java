@@ -1,9 +1,9 @@
-package com.cg.mts.repository;
+package com.cg.datajpa.mts.repository;
 
 import java.util.List;
 
-import com.cg.mts.entities.Complaint;
-import com.cg.mts.exception.ComplaintNotFoundException;
+import com.cg.datajpa.mts.entities.Complaint;
+import com.cg.datajpa.mts.exception.ComplaintNotFoundException;
 
 public interface IComplaintDao {
 

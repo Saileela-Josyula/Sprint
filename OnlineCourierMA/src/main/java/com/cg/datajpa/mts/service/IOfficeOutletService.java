@@ -1,12 +1,12 @@
-package com.cg.mts.service;
+package com.cg.datajpa.mts.service;
 
 import java.util.List;
 
-import com.cg.mts.entities.CourierOfficeOutlet;
-import com.cg.mts.entities.OfficeStaffMember;
-import com.cg.mts.exception.OutletClosedException;
-import com.cg.mts.exception.OutletNotFoundException;
-import com.cg.mts.exception.StaffMemberNotFoundException;
+import com.cg.datajpa.mts.entities.CourierOfficeOutlet;
+import com.cg.datajpa.mts.entities.OfficeStaffMember;
+import com.cg.datajpa.mts.exception.OutletClosedException;
+import com.cg.datajpa.mts.exception.OutletNotFoundException;
+import com.cg.datajpa.mts.exception.StaffMemberNotFoundException;
 
 public interface IOfficeOutletService {
 	

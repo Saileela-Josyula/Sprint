@@ -1,14 +1,14 @@
-package com.cg.mts.service;
+package com.cg.datajpa.mts.service;
 
 import java.util.List;
 
-import com.cg.mts.entities.Complaint;
-import com.cg.mts.entities.Courier;
-import com.cg.mts.entities.CourierOfficeOutlet;
-import com.cg.mts.entities.OfficeStaffMember;
-import com.cg.mts.exception.ComplaintNotFoundException;
-import com.cg.mts.exception.CourierNotFoundException;
-import com.cg.mts.exception.StaffMemberNotFoundException;
+import com.cg.datajpa.mts.entities.Complaint;
+import com.cg.datajpa.mts.entities.Courier;
+import com.cg.datajpa.mts.entities.CourierOfficeOutlet;
+import com.cg.datajpa.mts.entities.OfficeStaffMember;
+import com.cg.datajpa.mts.exception.ComplaintNotFoundException;
+import com.cg.datajpa.mts.exception.CourierNotFoundException;
+import com.cg.datajpa.mts.exception.StaffMemberNotFoundException;
 
 public interface IManagerService {
 

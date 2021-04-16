@@ -1,9 +1,9 @@
-package com.cg.mts.repository;
+package com.cg.datajpa.mts.repository;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import com.cg.mts.entities.Courier;
+import com.cg.datajpa.mts.entities.Courier;
 
 public interface ICourierDao {
 

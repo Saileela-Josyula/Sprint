@@ -1,7 +1,7 @@
-package com.cg.mts.service;
+package com.cg.datajpa.mts.service;
 
-import com.cg.mts.entities.Complaint;
-import com.cg.mts.entities.CourierStatus;
+import com.cg.datajpa.mts.entities.Complaint;
+import com.cg.datajpa.mts.entities.CourierStatus;
 
 public interface ICustomerService {
 

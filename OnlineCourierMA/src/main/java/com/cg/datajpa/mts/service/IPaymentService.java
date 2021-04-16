@@ -1,4 +1,4 @@
-package com.cg.mts.service;
+package com.cg.datajpa.mts.service;
 
 public interface IPaymentService {
 
