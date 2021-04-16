@@ -81,5 +81,10 @@ public class Customer {
 	public void setAcct(BankAccount acct) {
 		this.acct = acct;
 	}
+	@Override
+	public String toString() {
+		return "Customer [customerid=" + customerid + ", aadharno=" + aadharno + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", addr=" + addr + ", mobileno=" + mobileno + ", acct=" + acct + "]";
+	}
 	
 }
