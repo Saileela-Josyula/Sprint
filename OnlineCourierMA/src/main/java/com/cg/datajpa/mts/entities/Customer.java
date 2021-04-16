@@ -1,20 +1,37 @@
 package com.cg.datajpa.mts.entities;
 
-public class Customer {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-	private int customerid;
-	private int aadharno;
-	private String firstname;
-	private String lastname;
-	private Address addr;
-	private int mobileno;
-	private BankAccount acct;
+@Entity
+@Table(name="customer")
+public class Customer {
 	
+	@Id
+	@Column(name="customerid")
+	private int customerid;
+	@Column(name="aadharno")
+	private long aadharno;
+	@Column(name="firstname")
+	private String firstname;
+	@Column(name="lastname")
+	private String lastname;
+	@OneToOne
+	@JoinColumn(name="addid")
+	private Address addr;
+	@Column(name="mobileno")
+	private long mobileno;
+	@OneToOne
+	@JoinColumn(name="accountno")
+	private BankAccount acct;
 	public Customer() {
 		super();
 	}
-
-	public Customer(int customerid, int aadharno, String firstname, String lastname, Address addr, int mobileno,
+	public Customer(int customerid, long aadharno, String firstname, String lastname, Address addr, long mobileno,
 			BankAccount acct) {
 		super();
 		this.customerid = customerid;
@@ -25,7 +42,6 @@ public class Customer {
 		this.mobileno = mobileno;
 		this.acct = acct;
 	}
-
 	public int getCustomerid() {
 		return customerid;
 	}
@@ -34,11 +50,11 @@ public class Customer {
 		this.customerid = customerid;
 	}
 
-	public int getAadharno() {
+	public long getAadharno() {
 		return aadharno;
 	}
 
-	public void setAadharno(int aadharno) {
+	public void setAadharno(long aadharno) {
 		this.aadharno = aadharno;
 	}
 
@@ -66,11 +82,11 @@ public class Customer {
 		this.addr = addr;
 	}
 
-	public int getMobileno() {
+	public long getMobileno() {
 		return mobileno;
 	}
 
-	public void setMobileno(int mobileno) {
+	public void setMobileno(long mobileno) {
 		this.mobileno = mobileno;
 	}
 

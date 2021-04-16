@@ -1,9 +1,20 @@
 package com.cg.datajpa.mts.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="bankaccount")
 public class BankAccount {
 
+	@Id
+	@Column(name="accountno")
 	private int accountno;
+	@Column(name="accountholdername")
 	private String accountHolderName;
+	@Column(name="accounttype")
 	private String accountType;
 	public BankAccount() {}
 	public BankAccount(int accountno, String accountHolderName, String accountType) {
