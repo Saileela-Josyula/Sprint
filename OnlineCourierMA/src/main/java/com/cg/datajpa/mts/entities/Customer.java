@@ -1,4 +1,4 @@
-package com.cg.mts.entities;
+package com.cg.datajpa.mts.entities;
 
 public class Customer {
 
