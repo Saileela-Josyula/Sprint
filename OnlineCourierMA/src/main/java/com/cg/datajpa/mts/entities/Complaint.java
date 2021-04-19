@@ -1,11 +1,27 @@
 package com.cg.datajpa.mts.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="complaint")
 public class Complaint {
 
+	@Id
+	@Column(name="complaintid")
 	private int complaintid;
+	@Column(name="consignmentno")
 	private int consignmentno;
+	@Column(name="shortdescription")
 	private String shortdescription;
+	@Column(name="detaileddescription")
 	private String detaildescription;
+	@OneToOne
+	@JoinColumn(name="customerid")
 	private Customer customer;
 	
 	public Complaint()

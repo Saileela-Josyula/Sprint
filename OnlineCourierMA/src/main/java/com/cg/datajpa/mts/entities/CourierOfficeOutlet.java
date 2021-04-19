@@ -3,11 +3,29 @@ package com.cg.datajpa.mts.entities;
 import java.time.LocalTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="officeoutlet")
 public class CourierOfficeOutlet {
+	@Id
+	@Column(name="officeid")
 	private int officeid;
+	@OneToOne
+	@JoinColumn(name="addid")
 	private Address address;
+	@Column(name="openingtime")
 	private LocalTime openingTime;
-	private LocalTime closingTime;	
+	@Column(name="closingtime")
+	private LocalTime closingTime;
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="office")
 	private List<OfficeStaffMember> staffmembers;
 	
 	

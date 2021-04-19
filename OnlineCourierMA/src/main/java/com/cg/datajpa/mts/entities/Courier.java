@@ -2,15 +2,33 @@ package com.cg.datajpa.mts.entities;
 
 import java.time.LocalDate;
 
-public class Courier {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-	private int courierid;
-	private CourierStatus status;
-	private Customer sender;
-	private Customer receiver;
-	private int consignmentno;
+@Entity
+@Table(name="courier")
+public class Courier {
 	
+	@Id
+	@Column(name="courierid")
+	private int courierid;
+	@Column(name="status")
+	private CourierStatus status;
+	@OneToOne
+	@JoinColumn(name="senderid")
+	private Customer sender;
+	@OneToOne
+	@JoinColumn(name="receiverid")
+	private Customer receiver;
+	@Column(name="consignmentno")
+	private int consignmentno;
+	@Column(name="initiateddate")
 	private LocalDate initiatedDate;
+	@Column(name="deliverydate")
 	private LocalDate deliveredDate;
 	
 	public Courier()
