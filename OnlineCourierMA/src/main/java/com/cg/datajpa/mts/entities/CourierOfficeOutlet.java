@@ -18,7 +18,7 @@ public class CourierOfficeOutlet {
 	@Id
 	@Column(name="officeid")
 	private int officeid;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="addid")
 	private Address address;
 	@Column(name="openingtime")

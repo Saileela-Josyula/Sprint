@@ -1,5 +1,6 @@
 package com.cg.datajpa.mts.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -22,11 +23,11 @@ public class OfficeStaffMember {
 	protected int empid;
 	@Column(name="name")
 	protected String name;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="addid")
 	protected Address address;
-	@ManyToOne
-	@JoinColumn(name="officeid",updatable=false,insertable=false)
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="officeid")
 	protected CourierOfficeOutlet office;
 	@Column(name="mid")
 	int mid;

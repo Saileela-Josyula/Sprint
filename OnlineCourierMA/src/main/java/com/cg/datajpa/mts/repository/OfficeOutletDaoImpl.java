@@ -1,4 +1,4 @@
-package com.cg.mts.repository;
+package com.cg.datajpa.mts.repository;
 
 import java.util.List;
 
@@ -6,51 +6,46 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.cg.mts.entities.CourierOfficeOutlet;
-import com.cg.mts.exception.OutletNotFoundException;
+import com.cg.datajpa.mts.entities.CourierOfficeOutlet;
+import com.cg.datajpa.mts.exception.OutletNotFoundException;
 @Repository
 public class OfficeOutletDaoImpl implements IOfficeOutletDao {
-
-	@PersistenceUnit
-	private EntityManagerFactory emf;
+	@Autowired
+	EntityManager em;
+	public OfficeOutletDaoImpl() {
+		em=JpaUtils.getEntityManager();
+	}
+	
 	@Override
 	public void addNewOffice(CourierOfficeOutlet officeoutlet) {
-		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(officeoutlet);
 		em.getTransaction().commit();
-		em.close();
-		
 	}
 
 	@Override
 	public void removeNewOffice(CourierOfficeOutlet officeoutlet) {
-		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		em.remove(officeoutlet);
+		CourierOfficeOutlet managed=em.merge(officeoutlet);
+		em.remove(managed);
 		em.getTransaction().commit();
-		em.close();
-		
 	}
 
 	@Override
 	public CourierOfficeOutlet getOfficeInfo(int officeid) throws OutletNotFoundException {
-		EntityManager em=emf.createEntityManager();
-		CourierOfficeOutlet outlet = em.find(CourierOfficeOutlet.class, officeid);
-		em.close();
-		if(outlet==null)
+		CourierOfficeOutlet o=em.find(CourierOfficeOutlet.class, officeid);
+		if(o==null)
 			throw new OutletNotFoundException("Outlet does not exists");
 		else 
-			return outlet;
+			return o;
 	}
 
 	@Override
 	public List<CourierOfficeOutlet> getAllOfficesData() {
-		EntityManager em=emf.createEntityManager();
-		List<CourierOfficeOutlet> outlets = em.createQuery("Select t from officeoutlet t").getResultList();
-		em.close();
+		List<CourierOfficeOutlet> outlets = em.createQuery("Select t from CourierOfficeOutlet t").getResultList();
 		return outlets;
 	}
 

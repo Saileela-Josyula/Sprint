@@ -1,5 +1,6 @@
 package com.cg.datajpa.mts.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,12 +21,12 @@ public class Customer {
 	private String firstname;
 	@Column(name="lastname")
 	private String lastname;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="addid")
 	private Address addr;
 	@Column(name="mobileno")
 	private long mobileno;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="accountno")
 	private BankAccount acct;
 	public Customer() {

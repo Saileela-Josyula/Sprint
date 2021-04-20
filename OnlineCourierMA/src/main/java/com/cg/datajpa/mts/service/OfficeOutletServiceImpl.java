@@ -10,11 +10,17 @@ import com.cg.datajpa.mts.entities.CourierOfficeOutlet;
 import com.cg.datajpa.mts.exception.OutletClosedException;
 import com.cg.datajpa.mts.exception.OutletNotFoundException;
 import com.cg.datajpa.mts.repository.IOfficeOutletDao;
+import com.cg.datajpa.mts.repository.OfficeOutletDaoImpl;
 
 public class OfficeOutletServiceImpl implements IOfficeOutletService {
 	
 	@Autowired
-	IOfficeOutletDao dao;
+	OfficeOutletDaoImpl dao;
+	public void setOfficeOutletDAO(OfficeOutletDaoImpl officeDAO) {
+		this.dao=officeDAO;
+	}
+	
+	
 	
 	@Override
 	public void addNewOffice(CourierOfficeOutlet officeoutlet) {
