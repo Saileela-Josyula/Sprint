@@ -3,6 +3,7 @@ package com.cg.datajpa.mts.entities;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -11,8 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="role")
+@Inheritance(strategy=InheritanceType.JOINED)
 @Entity
 @Table(name="officemember")
 public class OfficeStaffMember {
@@ -25,32 +25,32 @@ public class OfficeStaffMember {
 	@OneToOne
 	@JoinColumn(name="addid")
 	protected Address address;
-	@Column(name="role")
-	protected String role;
 	@ManyToOne
 	@JoinColumn(name="officeid",updatable=false,insertable=false)
 	protected CourierOfficeOutlet office;
+	@Column(name="mid")
+	int mid;
 	
-	@ManyToOne
-	@JoinColumn(name="mid",updatable=false,insertable=false)
-	protected Manager manager;
 	public OfficeStaffMember(){}
 	
-	public OfficeStaffMember(int empid, String name, Address address, String role, CourierOfficeOutlet office,
-			Manager manager) {
+	public OfficeStaffMember(int empid, String name, Address address, CourierOfficeOutlet office,int mid) {
 		super();
 		this.empid = empid;
 		this.name = name;
 		this.address = address;
-		this.role = role;
 		this.office = office;
-		this.manager = manager;
+		this.mid=mid;
 	}
 
-	@Override
-	public String toString() {
-		return "OfficeStaffMember[empid=" +empid +",name ="+name+",adress="+address+",role="+role+"]";
+
+	public int getMid() {
+		return mid;
 	}
+
+	public void setMid(int mid) {
+		this.mid = mid;
+	}
+
 	protected int getEmpid() {
 		return empid;
 	}
@@ -69,25 +69,19 @@ public class OfficeStaffMember {
 	protected void setAddress(Address address) {
 		this.address = address;
 	}
-	protected String getRole() {
-		return role;
-	}
-	protected void setRole(String role) {
-		this.role = role;
-	}
+	
 	protected CourierOfficeOutlet getOffice() {
 		return office;
 	}
 	protected void setOffice(CourierOfficeOutlet office) {
 		this.office = office;
 	}
+	
 
-	public Manager getManager() {
-		return manager;
-	}
-
-	public void setManager(Manager manager) {
-		this.manager = manager;
+	@Override
+	public String toString() {
+		return "OfficeStaffMember [empid=" + empid + ", name=" + name + ", address=" + address 
+				+ ", mid=" + mid + "]";
 	}
 	
 }

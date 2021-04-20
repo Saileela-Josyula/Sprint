@@ -51,15 +51,19 @@ public class Test {
         if(member!=null) {
         	System.out.println(member);
         }
-        /*
-        Manager m=manager.find(Manager.class, 201);
-        if(m!=null) {
-        	System.out.println("====vvvvvvv======");
-        	for(OfficeStaffMember om:m.getReportingstaffmembers())
-        		System.out.println(om);
-        	
-        }
-        */
+  
+       Manager m=manager.find(Manager.class, 703);
+       if(m!=null) {
+    	   System.out.println("===========vvvvvvvvvv===========");
+    	   System.out.println(m);
+    	   for(OfficeStaffMember o:m.getReportingstaffmembers()) {
+    		   System.out.println(o);
+    		   System.out.println(o.getMid());
+    	   }
+    		 
+    	   System.out.println("===========vvvvvvvvvv===========");
+       }
+    	 
         manager.close();
         emf.close();
 	}
