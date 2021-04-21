@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import com.cg.datajpa.mts.entities.CourierStatus;
 import com.cg.datajpa.mts.entities.Complaint;
 import com.cg.datajpa.mts.entities.Courier;
 import com.cg.datajpa.mts.entities.CourierOfficeOutlet;
@@ -16,11 +16,12 @@ import com.cg.datajpa.mts.exception.StaffMemberNotFoundException;
 import com.cg.datajpa.mts.repository.ComplaintDaoImpl;
 import com.cg.datajpa.mts.repository.CourierDAOImp;
 import com.cg.datajpa.mts.repository.StaffMemberDAOImp;
+import com.cg.datajpa.mts.repository.ComplaintDaoImpl;
+import com.cg.datajpa.mts.repository.CourierDAOImp;
 
 public class ManagerServiceImpl implements IManagerService {
 	@Autowired
 	StaffMemberDAOImp dao;
-	
 	public void setStaffMemberDAOImpl(StaffMemberDAOImp staffDAO) {
 		this.dao=staffDAO;
 	}
@@ -106,5 +107,4 @@ public class ManagerServiceImpl implements IManagerService {
 		data=d.getAllComplaints();
 		return data;
 	}
-
 }
