@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import com.cg.datajpa.mts.entities.CourierStatus;
 import com.cg.datajpa.mts.entities.Complaint;
 import com.cg.datajpa.mts.entities.Courier;
 import com.cg.datajpa.mts.entities.CourierOfficeOutlet;
@@ -13,10 +13,21 @@ import com.cg.datajpa.mts.exception.ComplaintNotFoundException;
 import com.cg.datajpa.mts.exception.CourierNotFoundException;
 import com.cg.datajpa.mts.exception.StaffMemberNotFoundException;
 import com.cg.datajpa.mts.repository.StaffMemberDAOImp;
+import com.cg.datajpa.mts.repository.ComplaintDaoImpl;
+import com.cg.datajpa.mts.repository.CourierDAOImp;
 
 public class ManagerServiceImpl implements IManagerService {
 	@Autowired
 	StaffMemberDAOImp dao;
+	
+	@Autowired
+	CourierDAOImp da;
+	
+	@Autowired
+	ComplaintDaoImpl d;
+	
+	
+	
 	
 	public void setStaffMemberDAOImpl(StaffMemberDAOImp staffDAO) {
 		this.dao=staffDAO;
@@ -58,21 +69,40 @@ public class ManagerServiceImpl implements IManagerService {
 	}
 
 	@Override
-	public boolean getCourierStatus(Courier courier) throws CourierNotFoundException {
+	public CourierStatus getCourierStatus(Courier courier) throws CourierNotFoundException {
 		// TODO Auto-generated method stub
-		return false;
+		CourierStatus member=null;
+		Courier updatedcourier= null;
+		
+			updatedcourier=da.getCourierInfo(courier.getCourierid());
+		
+		if(updatedcourier==null) {
+			throw new CourierNotFoundException();
+		}
+		else {
+			return updatedcourier.getStatus();
+		}
+		
 	}
 
 	@Override
 	public Complaint getRegistedComplaint(int complaintid) throws ComplaintNotFoundException {
 		// TODO Auto-generated method stub
-		return null;
+		Complaint member=null;
+		try {
+			member=d.getComplaint(complaintid);
+		}
+		catch(ComplaintNotFoundException ex) {
+			
+		}
+		return member;
 	}
 
 	@Override
 	public List<Complaint> getAllComplaints() {
 		// TODO Auto-generated method stub
-		return null;
+		List<Complaint> data=new ArrayList<>();
+		data=d.getAllComplaints();
+		return data;
 	}
-
 }
