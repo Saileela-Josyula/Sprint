@@ -4,13 +4,13 @@ public class PaymentsServiceImp implements IPaymentService {
 
 	@Override
 	public void processPaymentByCash() {
-		// TODO Auto-generated method stub
+		System.out.println("Payment is done by Cash");
 
 	}
 
 	@Override
 	public void processPaymentByCard() {
-		// TODO Auto-generated method stub
+		System.out.println("Payment is done by Card");
 
 	}
 
