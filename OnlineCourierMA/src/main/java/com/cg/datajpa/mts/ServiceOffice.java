@@ -10,7 +10,7 @@ import com.cg.datajpa.mts.entities.OfficeStaffMember;
 import com.cg.datajpa.mts.repository.OfficeOutletDaoImpl;
 import com.cg.datajpa.mts.service.OfficeOutletServiceImpl;
 
-public class ServiceCheck {
+public class ServiceOffice {
 	public static void main(String[] args) {
 		OfficeOutletServiceImpl outletService=new OfficeOutletServiceImpl();
 		outletService.setOfficeOutletDAO(new OfficeOutletDaoImpl());

@@ -2,6 +2,8 @@ package com.cg.datajpa.mts.repository;
 
 import java.time.LocalDate;
 import com.cg.datajpa.mts.entities.Courier;
+import com.cg.datajpa.mts.entities.CourierStatus;
+
 import java.util.List;
 
 import com.cg.datajpa.mts.entities.Courier;
@@ -14,6 +16,6 @@ public interface ICourierDao {
 	
 	public List<Courier> getAllDeliveredCouriers();
 	public List<Courier> getAllDeliveredCouriersByDate(LocalDate date);
-	public void updateCourierInfoSet(Courier status, int statusNo);
+	public void updateCourierInfoSet(Courier status, CourierStatus s);
 	
 }

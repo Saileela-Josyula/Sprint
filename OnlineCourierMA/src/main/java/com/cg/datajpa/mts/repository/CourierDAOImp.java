@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cg.datajpa.mts.entities.Courier;
+import com.cg.datajpa.mts.entities.CourierStatus;
 
 
 
@@ -53,11 +54,11 @@ public class CourierDAOImp implements ICourierDao {
 		return c;
 	}
 	@Override
-	public void updateCourierInfoSet(Courier status,int statusNo) {
+	public void updateCourierInfoSet(Courier status,CourierStatus s) {
 		eManager.getTransaction().begin();
 		Query qry= eManager.createQuery("update Courier c set c.status=?2 where c.courierid=?1");
 		qry.setParameter(1, status.getCourierid());
-		qry.setParameter(2, statusNo);
+		qry.setParameter(2, s);
 		qry.executeUpdate();
 		eManager.getTransaction().commit();
 		
