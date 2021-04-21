@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.cg.datajpa.mts.entities.Complaint;
 import com.cg.datajpa.mts.entities.Courier;
 import com.cg.datajpa.mts.entities.CourierOfficeOutlet;
+import com.cg.datajpa.mts.entities.CourierStatus;
 import com.cg.datajpa.mts.entities.OfficeStaffMember;
 import com.cg.datajpa.mts.exception.ComplaintNotFoundException;
 import com.cg.datajpa.mts.exception.CourierNotFoundException;
 import com.cg.datajpa.mts.exception.StaffMemberNotFoundException;
+import com.cg.datajpa.mts.repository.ComplaintDaoImpl;
+import com.cg.datajpa.mts.repository.CourierDAOImp;
 import com.cg.datajpa.mts.repository.StaffMemberDAOImp;
 
 public class ManagerServiceImpl implements IManagerService {
@@ -22,8 +25,17 @@ public class ManagerServiceImpl implements IManagerService {
 		this.dao=staffDAO;
 	}
 	
+	@Autowired
+	CourierDAOImp da;
+	public void setCourierDAOImp(CourierDAOImp courierDAO) {
+		this.da=courierDAO;
+	}
 	
-	
+	@Autowired
+	ComplaintDaoImpl d;
+	public void setComplaintDAOImp(ComplaintDaoImpl complaintDAO) {
+		this.d=complaintDAO;
+	}
 	@Override
 	public void addStaffMember(OfficeStaffMember staffmember) {
 		// TODO Auto-generated method stub
@@ -58,21 +70,41 @@ public class ManagerServiceImpl implements IManagerService {
 	}
 
 	@Override
-	public boolean getCourierStatus(Courier courier) throws CourierNotFoundException {
+	public CourierStatus getCourierStatus(Courier courier) throws CourierNotFoundException {
 		// TODO Auto-generated method stub
-		return false;
+		CourierStatus member=null;
+		Courier updatedcourier= null;
+		
+			updatedcourier=da.getCourierInfo(courier.getCourierid());
+		
+		if(updatedcourier==null) {
+			throw new CourierNotFoundException("Courier not found");
+		}
+		else {
+			return updatedcourier.getStatus();
+		}
+		
 	}
 
 	@Override
 	public Complaint getRegistedComplaint(int complaintid) throws ComplaintNotFoundException {
 		// TODO Auto-generated method stub
-		return null;
+		Complaint member=null;
+		try {
+			member=d.getComplaint(complaintid);
+		}
+		catch(ComplaintNotFoundException ex) {
+			
+		}
+		return member;
 	}
 
 	@Override
 	public List<Complaint> getAllComplaints() {
 		// TODO Auto-generated method stub
-		return null;
+		List<Complaint> data=new ArrayList<>();
+		data=d.getAllComplaints();
+		return data;
 	}
 
 }
