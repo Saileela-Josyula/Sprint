@@ -14,5 +14,6 @@ public interface ICourierDao {
 	
 	public List<Courier> getAllDeliveredCouriers();
 	public List<Courier> getAllDeliveredCouriersByDate(LocalDate date);
+	public void updateCourierInfoSet(Courier status, int statusNo);
 	
 }

@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,16 @@ public class CourierDAOImp implements ICourierDao {
 		qry.setParameter(1, date);
 		List<Courier> c=qry.getResultList();
 		return c;
+	}
+	@Override
+	public void updateCourierInfoSet(Courier status,int statusNo) {
+		eManager.getTransaction().begin();
+		Query qry= eManager.createQuery("update Courier c set c.status=?2 where c.courierid=?1");
+		qry.setParameter(1, status.getCourierid());
+		qry.setParameter(2, statusNo);
+		qry.executeUpdate();
+		eManager.getTransaction().commit();
+		
 	}
 	}
 	
