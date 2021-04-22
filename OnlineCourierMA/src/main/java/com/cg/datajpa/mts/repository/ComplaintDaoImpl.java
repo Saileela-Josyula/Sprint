@@ -22,27 +22,27 @@ public class ComplaintDaoImpl implements IComplaintDao
 	
 	@Override
 	public void addNewComplaint(Complaint complaint) {
-		em.getTransaction().begin();
+		//em.getTransaction().begin();
 		em.persist(complaint);
-		em.getTransaction().commit();
+		//em.getTransaction().commit();
 	}
 
 	
 	@Override
 	public void removeComplaint(Complaint complaint) {
-		em.getTransaction().begin();
+		//em.getTransaction().begin();
 		Complaint c=em.merge(complaint);
 		em.remove(c);
-		em.getTransaction().commit();
+		//em.getTransaction().commit();
 	}
 
 	@Override
 	public void updateComplaint(Complaint complaint) {
 		// TODO Auto-generated method stub
-		em.getTransaction().begin();
+		//em.getTransaction().begin();
 		Complaint c=em.merge(complaint);
 		em.merge(c);
-		em.getTransaction().commit();
+		//em.getTransaction().commit();
 	}
 
 	@Override

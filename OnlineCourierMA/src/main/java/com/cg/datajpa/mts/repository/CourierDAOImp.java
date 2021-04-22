@@ -25,9 +25,9 @@ public class CourierDAOImp implements ICourierDao {
 	@Override
 	public void addCourierInfo(Courier courier)
 	{
-		eManager.getTransaction().begin();
+		//eManager.getTransaction().begin();
 		eManager.persist(courier);
-		eManager.getTransaction().commit();
+		//eManager.getTransaction().commit();
 	}
 	@Override
 	public Courier getCourierInfo(int courierid) throws CourierNotFoundException
@@ -42,9 +42,9 @@ public class CourierDAOImp implements ICourierDao {
 	@Override
 	public void removeCourierInfo(int courierid)
 	{
-		eManager.getTransaction().begin();
+		//eManager.getTransaction().begin();
 		eManager.remove(eManager.find(Courier.class, courierid));
-		eManager.getTransaction().commit();
+		//eManager.getTransaction().commit();
 	}
 	
 	@Override
@@ -62,12 +62,12 @@ public class CourierDAOImp implements ICourierDao {
 	}
 	@Override
 	public void updateCourierInfoSet(Courier status,CourierStatus s) {
-		eManager.getTransaction().begin();
+		//eManager.getTransaction().begin();
 		Query qry= eManager.createQuery("update Courier c set c.status=?2 where c.courierid=?1");
 		qry.setParameter(1, status.getCourierid());
 		qry.setParameter(2, s);
 		qry.executeUpdate();
-		eManager.getTransaction().commit();
+		//eManager.getTransaction().commit();
 		
 	}
 	}

@@ -2,6 +2,7 @@ package com.cg.datajpa.mts.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,10 +19,10 @@ public class Courier {
 	private int courierid;
 	@Column(name="status")
 	private CourierStatus status;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="senderid")
 	private Customer sender;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="receiverid")
 	private Customer receiver;
 	@Column(name="consignmentno")

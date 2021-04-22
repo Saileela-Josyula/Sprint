@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,7 +34,7 @@ public class ShipmentController {
 	public void setShipmentService(ShipmentServiceImp shipmentService) {
 		this.shipmentService = shipmentService;
 	}
-	
+	@Transactional
 	@PutMapping(value="/initiate",consumes = "application/json")
 	public ResponseEntity<HttpStatus> initiateShipmentTransaction(@RequestBody Courier courier) {
 		shipmentService.initiateShipmentTransaction(courier);
@@ -54,13 +55,13 @@ public class ShipmentController {
 		else
 			return new ResponseEntity<Optional<CourierStatus>>(HttpStatus.NOT_FOUND);
 	}
-	
+	@Transactional
 	@PutMapping(value="/close",consumes = "application/json")
 	public ResponseEntity<HttpStatus> closeShipmentTransaction(@RequestBody Courier courier) {
 		shipmentService.closeShipmentTransaction(courier);
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
-	
+	@Transactional
 	@PutMapping(value="/reject",consumes = "application/json")
 	public ResponseEntity<HttpStatus> rejectShipmentTransaction(@RequestBody Courier courier) {
 		shipmentService.rejectShipmentTransaction(courier);

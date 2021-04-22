@@ -11,13 +11,13 @@ public class BankAccount {
 
 	@Id
 	@Column(name="accountno")
-	private int accountno;
+	private long accountno;
 	@Column(name="accountholdername")
 	private String accountHolderName;
 	@Column(name="accounttype")
 	private String accountType;
 	public BankAccount() {}
-	public BankAccount(int accountno, String accountHolderName, String accountType) {
+	public BankAccount(long accountno, String accountHolderName, String accountType) {
 		
 		this.accountno = accountno;
 		this.accountHolderName = accountHolderName;
@@ -28,10 +28,10 @@ public class BankAccount {
 		return "BankAccount [accountno=" + accountno + ", accountHolderName=" + accountHolderName + ", accountType="
 				+ accountType + "]";
 	}
-	public int getAccountno() {
+	public long getAccountno() {
 		return accountno;
 	}
-	public void setAccountno(int accountno) {
+	public void setAccountno(long accountno) {
 		this.accountno = accountno;
 	}
 	public String getAccountHolderName() {

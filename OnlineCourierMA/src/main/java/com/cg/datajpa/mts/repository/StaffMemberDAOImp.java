@@ -24,18 +24,18 @@ public class StaffMemberDAOImp implements IStaffMemberDao {
 	@Override
 	public void addStaffMember(OfficeStaffMember staffmember) 
 	{
-       em.getTransaction().begin();
+       //em.getTransaction().begin();
        em.persist(staffmember);
-       em.getTransaction().commit();
+       //em.getTransaction().commit();
 	}
 
 	@Override
 	public void removeStaffMember(OfficeStaffMember staffmember)
 	{
-		em.getTransaction().begin();
+		//em.getTransaction().begin();
 		OfficeStaffMember o=em.merge(staffmember);
 		em.remove(o);
-		em.getTransaction().commit();
+		//em.getTransaction().commit();
 	}
 
 	@Override

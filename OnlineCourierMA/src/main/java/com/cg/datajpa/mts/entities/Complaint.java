@@ -1,5 +1,6 @@
 package com.cg.datajpa.mts.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,8 +20,8 @@ public class Complaint {
 	@Column(name="shortdescription")
 	private String shortdescription;
 	@Column(name="detaileddescription")
-	private String detaildescription;
-	@OneToOne
+	private String detaileddescription;
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="customerid")
 	private Customer customer;
 	
@@ -33,7 +34,7 @@ public class Complaint {
 		this.complaintid = complaintid;
 		this.consignmentno = consignmentno;
 		this.shortdescription = shortdescription;
-		this.detaildescription = detaildescription;
+		this.detaileddescription = detaildescription;
 		this.customer = customer;
 	}
 
@@ -62,11 +63,11 @@ public class Complaint {
 	}
 
 	public String getDetaildescription() {
-		return detaildescription;
+		return detaileddescription;
 	}
 
 	public void setDetaildescription(String detaildescription) {
-		this.detaildescription = detaildescription;
+		this.detaileddescription = detaildescription;
 	}
 
 	public Customer getCustomer() {
@@ -80,7 +81,7 @@ public class Complaint {
 	@Override
 	public String toString() {
 		return "Complaint [complaintid=" + complaintid + ", consignmentno=" + consignmentno + ", shortdescription="
-				+ shortdescription + ", detaildescription=" + detaildescription + ", customer=" + customer + "]";
+				+ shortdescription + ", detaildescription=" + detaileddescription + ", customer=" + customer + "]";
 	}
 	
 	

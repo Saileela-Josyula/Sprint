@@ -21,17 +21,17 @@ public class OfficeOutletDaoImpl implements IOfficeOutletDao {
 	
 	@Override
 	public void addNewOffice(CourierOfficeOutlet officeoutlet) {
-		em.getTransaction().begin();
+		//em.getTransaction().begin();
 		em.persist(officeoutlet);
-		em.getTransaction().commit();
+		//em.getTransaction().commit();
 	}
 
 	@Override
 	public void removeNewOffice(CourierOfficeOutlet officeoutlet) {
-		em.getTransaction().begin();
+		//.getTransaction().begin();
 		CourierOfficeOutlet managed=em.merge(officeoutlet);
 		em.remove(managed);
-		em.getTransaction().commit();
+		//em.getTransaction().commit();
 	}
 
 	@Override

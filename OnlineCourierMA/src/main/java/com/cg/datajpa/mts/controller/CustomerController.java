@@ -3,8 +3,10 @@ package com.cg.datajpa.mts.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,8 +38,8 @@ public class CustomerController
 	public void setCourierDao(CourierDAOImp courierDao) {
 		this.courierDao = courierDao;
 	}
-
-	@PutMapping(value="/initiateProcess",consumes="application/json")
+	@Transactional
+	@PostMapping(value="/addcourier",consumes="application/json")
      public ResponseEntity<HttpStatus> initiateProcess(@RequestBody Courier courier) {
     	 
 		courierDao.addCourierInfo(courier);
@@ -61,8 +63,8 @@ public class CustomerController
 		}
     	 return new ResponseEntity<CourierStatus>(cs,HttpStatus.OK);
      }
-     
-     @PutMapping(value="/complaint",consumes="application/json")
+     @Transactional
+     @PostMapping(value="/complaint",consumes="application/json")
      public ResponseEntity<HttpStatus> registerComplaint(@RequestBody Complaint complaint){
     	 custService.registerComplaint(complaint);
     	 return new ResponseEntity<HttpStatus>(HttpStatus.OK);

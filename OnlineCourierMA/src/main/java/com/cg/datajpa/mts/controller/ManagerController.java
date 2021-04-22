@@ -72,7 +72,7 @@ public class ManagerController {
 			return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@GetMapping(value="/courier/{courierid}",produces="application/json")
 	public ResponseEntity<Optional<CourierStatus>> getCourierStatus(@PathVariable("courierid")int courierid)
 	{
