@@ -7,12 +7,14 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.cg.datajpa.mts.entities.Courier;
 import com.cg.datajpa.mts.entities.CourierStatus;
+import com.cg.datajpa.mts.exception.CourierNotFoundException;
 
 
-
+@Repository
 public class CourierDAOImp implements ICourierDao {
 	
 	@Autowired
@@ -28,9 +30,14 @@ public class CourierDAOImp implements ICourierDao {
 		eManager.getTransaction().commit();
 	}
 	@Override
-	public Courier getCourierInfo(int courierid)
+	public Courier getCourierInfo(int courierid) throws CourierNotFoundException
 	{	
-		return eManager.find(Courier.class, courierid);
+		Courier courier=null;
+		courier= eManager.find(Courier.class, courierid);
+		if(courier!=null)
+			return courier;
+		else
+			throw new CourierNotFoundException("Courier not found");
 	}
 	@Override
 	public void removeCourierInfo(int courierid)

@@ -1,6 +1,7 @@
 package com.cg.datajpa.mts.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cg.datajpa.mts.entities.Complaint;
 import com.cg.datajpa.mts.entities.Courier;
@@ -8,15 +9,10 @@ import com.cg.datajpa.mts.entities.CourierStatus;
 import com.cg.datajpa.mts.exception.CourierNotFoundException;
 import com.cg.datajpa.mts.repository.ComplaintDaoImpl;
 import com.cg.datajpa.mts.repository.CourierDAOImp;
-
+@Service
 public class CustomerServiceImp implements ICustomerService {
-
-	@Autowired
-	CourierStatus status;
 	
-	public void setStatus(CourierStatus status) {
-		this.status = status;
-	}
+	
 	
 	@Autowired
 	CourierDAOImp c;	
@@ -29,7 +25,13 @@ public class CustomerServiceImp implements ICustomerService {
 	public void setCdoa(ComplaintDaoImpl cdao) {
 		this.cdao = cdao;
 	}
-
+	
+	@Autowired
+	PaymentsServiceImp paymentService;
+	public void setPaymentService(PaymentsServiceImp ps) {
+		this.paymentService=ps;
+	}
+	
 	@Override
 	public void initiateProcess(int courierid)throws CourierNotFoundException
 	{
@@ -47,9 +49,12 @@ public class CustomerServiceImp implements ICustomerService {
 	}
 
 	@Override
-	public void makePayment() {
-		// TODO Auto-generated method stub
-		System.out.println("----------------");
+	public void makePayment(String method) {
+		if(method.equals("cash"))
+			paymentService.processPaymentByCash();
+		else if(method.equals("card"))
+			paymentService.processPaymentByCard();
+			
 	}
 
 	@Override

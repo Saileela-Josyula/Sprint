@@ -5,11 +5,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.cg.datajpa.mts.entities.Complaint;
 import com.cg.datajpa.mts.exception.ComplaintNotFoundException;
 
-
+@Repository
 public class ComplaintDaoImpl implements IComplaintDao
 {
 	@Autowired

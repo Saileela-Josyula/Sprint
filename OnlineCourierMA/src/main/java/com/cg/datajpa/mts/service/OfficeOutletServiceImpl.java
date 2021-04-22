@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cg.datajpa.mts.entities.CourierOfficeOutlet;
 import com.cg.datajpa.mts.exception.OutletClosedException;
 import com.cg.datajpa.mts.exception.OutletNotFoundException;
 import com.cg.datajpa.mts.repository.IOfficeOutletDao;
 import com.cg.datajpa.mts.repository.OfficeOutletDaoImpl;
-
+@Service
 public class OfficeOutletServiceImpl implements IOfficeOutletService {
 	
 	@Autowired

@@ -8,11 +8,12 @@ import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.cg.datajpa.mts.entities.CourierOfficeOutlet;
 import com.cg.datajpa.mts.entities.OfficeStaffMember;
 import com.cg.datajpa.mts.exception.StaffMemberNotFoundException;
-
+@Repository
 public class StaffMemberDAOImp implements IStaffMemberDao {
 
 	@Autowired

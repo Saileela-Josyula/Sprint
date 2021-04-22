@@ -1,5 +1,8 @@
 package com.cg.datajpa.mts.service;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class PaymentsServiceImp implements IPaymentService {
 
 	@Override

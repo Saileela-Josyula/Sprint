@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.cg.datajpa.mts.entities.Courier;
 import com.cg.datajpa.mts.entities.CourierStatus;
+import com.cg.datajpa.mts.exception.CourierNotFoundException;
 import com.cg.datajpa.mts.repository.CourierDAOImp;
 import com.cg.datajpa.mts.service.ShipmentServiceImp;
 
@@ -18,10 +19,16 @@ public class ServiceShipment {
 		//shipmentservice.initiateShipmentTransaction(courier);
 		//System.out.println(shipmentservice.checkShipmentStatus(courier));
 		
-		shipmentservice.closeShipmentTransaction(courier);
+		shipmentservice.initiateShipmentTransaction(courier);
 		
 		//shipmentservice.rejectShipmentTransaction(courier);
-		System.out.println(shipmentservice.checkShipmentStatus(courier));
+		try {
+			System.out.println(shipmentservice.checkShipmentStatus(courier));
+		}
+		catch(CourierNotFoundException e) {
+			
+		}
+		
 	}
 	
 	

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.cg.datajpa.mts.entities.CourierStatus;
 import com.cg.datajpa.mts.entities.Complaint;
 import com.cg.datajpa.mts.entities.Courier;
@@ -18,7 +20,7 @@ import com.cg.datajpa.mts.repository.CourierDAOImp;
 import com.cg.datajpa.mts.repository.StaffMemberDAOImp;
 import com.cg.datajpa.mts.repository.ComplaintDaoImpl;
 import com.cg.datajpa.mts.repository.CourierDAOImp;
-
+@Service
 public class ManagerServiceImpl implements IManagerService {
 	@Autowired
 	StaffMemberDAOImp dao;
@@ -106,5 +108,10 @@ public class ManagerServiceImpl implements IManagerService {
 		List<Complaint> data=new ArrayList<>();
 		data=d.getAllComplaints();
 		return data;
+	}
+	public List<Courier> getAllDeliveredCouriers(){
+		List<Courier> couriers=new ArrayList<>();
+		couriers=da.getAllDeliveredCouriers();
+		return couriers;
 	}
 }
