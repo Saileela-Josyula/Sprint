@@ -72,7 +72,13 @@ public class CustomerController
      
      @GetMapping(value="/payment/{processPaymentByCash}",consumes="application/json")
      public ResponseEntity<HttpStatus> makePayment(@PathVariable("processPaymentByCash") String payment){
-    	 custService.makePayment(payment);
-    	 return new ResponseEntity<HttpStatus>(HttpStatus.OK); 
+    	 if(payment.equals("card") || payment.equals("cash")) {
+    		 custService.makePayment(payment);
+        	 return new ResponseEntity<HttpStatus>(HttpStatus.OK); 
+    	 }
+    	 else {
+    		 return new ResponseEntity<HttpStatus>(HttpStatus.BAD_GATEWAY);
+    	 }
+    	
      }
 }

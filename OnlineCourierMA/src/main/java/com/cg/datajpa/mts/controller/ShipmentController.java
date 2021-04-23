@@ -36,8 +36,8 @@ public class ShipmentController {
 	}
 	@Transactional
 	@PutMapping(value="/initiate",consumes = "application/json")
-	public ResponseEntity<HttpStatus> initiateShipmentTransaction(@RequestBody Courier courier) {
-		shipmentService.initiateShipmentTransaction(courier);
+	public ResponseEntity<HttpStatus> initiateShipmentTransaction(@RequestBody int courierid) {
+		shipmentService.initiateShipmentTransaction(courierid);
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 	
@@ -57,19 +57,15 @@ public class ShipmentController {
 	}
 	@Transactional
 	@PutMapping(value="/close",consumes = "application/json")
-	public ResponseEntity<HttpStatus> closeShipmentTransaction(@RequestBody Courier courier) {
-		shipmentService.closeShipmentTransaction(courier);
+	public ResponseEntity<HttpStatus> closeShipmentTransaction(@RequestBody int courierid) {
+		shipmentService.closeShipmentTransaction(courierid);
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 	@Transactional
 	@PutMapping(value="/reject",consumes = "application/json")
-	public ResponseEntity<HttpStatus> rejectShipmentTransaction(@RequestBody Courier courier) {
-		shipmentService.rejectShipmentTransaction(courier);
+	public ResponseEntity<HttpStatus> rejectShipmentTransaction(@RequestBody int courierid) {
+		shipmentService.rejectShipmentTransaction(courierid);
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 	
-	
-	
-	
-
 }

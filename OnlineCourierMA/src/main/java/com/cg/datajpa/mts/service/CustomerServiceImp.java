@@ -42,7 +42,7 @@ public class CustomerServiceImp implements ICustomerService {
 		 if(courier!=null)
 		 {
 			 courier.setStatus(st);
-			 c.updateCourierInfoSet(courier, st);
+			 c.updateCourierInfoSet(courierid, st);
 		 }
 		
 			 throw new CourierNotFoundException("Courier not found");			

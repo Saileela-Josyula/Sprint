@@ -18,9 +18,9 @@ public class ShipmentServiceImp implements IShipmentService {
 	}
 
 	@Override
-	public void initiateShipmentTransaction(Courier courier) {
+	public void initiateShipmentTransaction(int courierid) {
 		// TODO Auto-generated method stub
-		courdao.updateCourierInfoSet(courier,CourierStatus.intransit);
+		courdao.updateCourierInfoSet(courierid,CourierStatus.intransit);
 
 	}
 
@@ -45,15 +45,15 @@ public class ShipmentServiceImp implements IShipmentService {
 	}
 
 	@Override
-	public void closeShipmentTransaction(Courier courier) {
+	public void closeShipmentTransaction(int courierid) {
 		// TODO Auto-generated method stub
-		courdao.updateCourierInfoSet(courier,CourierStatus.delivered);
+		courdao.updateCourierInfoSet(courierid,CourierStatus.delivered);
 	}
 
 	@Override
-	public void rejectShipmentTransaction(Courier courier) {
+	public void rejectShipmentTransaction(int courierid) {
 		// TODO Auto-generated method stub
-		courdao.updateCourierInfoSet(courier,CourierStatus.rejected);
+		courdao.updateCourierInfoSet(courierid,CourierStatus.rejected);
 	}
 
 }
