@@ -36,7 +36,7 @@ public class CourierOfficeOutlet {
 	
 	public CourierOfficeOutlet()
 	{}
-
+	
 
 	public CourierOfficeOutlet( Address address, LocalTime openingTime, LocalTime closingTime,
 			List<OfficeStaffMember> staffmembers) {

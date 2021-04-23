@@ -18,13 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.datajpa.mts.entities.Complaint;
 import com.cg.datajpa.mts.entities.Courier;
+import com.cg.datajpa.mts.entities.CourierOfficeOutlet;
 import com.cg.datajpa.mts.entities.CourierStatus;
+import com.cg.datajpa.mts.entities.OfficeMember;
 import com.cg.datajpa.mts.entities.OfficeStaffMember;
 import com.cg.datajpa.mts.exception.CourierNotFoundException;
+import com.cg.datajpa.mts.exception.OutletNotFoundException;
 import com.cg.datajpa.mts.exception.StaffMemberNotFoundException;
 import com.cg.datajpa.mts.repository.StaffMemberDAOImp;
 import com.cg.datajpa.mts.service.CustomerServiceImp;
 import com.cg.datajpa.mts.service.ManagerServiceImpl;
+import com.cg.datajpa.mts.service.OfficeOutletServiceImpl;
 
 @RestController
 @RequestMapping("/manager")
@@ -38,6 +42,15 @@ public class ManagerController {
 	
 	@Autowired
 	CustomerServiceImp customerService;
+	
+	@Autowired
+	OfficeOutletServiceImpl officeService;
+	
+
+	public void setOfficeService(OfficeOutletServiceImpl officeService) {
+		this.officeService = officeService;
+	}
+
 	public void setCustomerServiceImp(CustomerServiceImp cs) {
 		this.customerService=cs;
 	}
@@ -50,10 +63,21 @@ public class ManagerController {
 	}
 	@Transactional
 	@PostMapping(value="/addstaff" ,consumes="application/json")
-	public ResponseEntity<HttpStatus> addOfficeStaff(@RequestBody OfficeStaffMember osm)
-	{
-		managerService.addStaffMember(osm);
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+	public ResponseEntity<HttpStatus> addOfficeStaff(@RequestBody OfficeMember osm)
+	{	CourierOfficeOutlet office=null;
+		try {
+			office=officeService.getOfficeInfo(osm.getOfficeid());
+		}catch(OutletNotFoundException ex) {}
+		if(office!=null) {
+			osm.getMember().setOffice(office);
+			managerService.addStaffMember(osm.getMember());
+			return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+		}
+					
+		
 	}
 	@Transactional
 	@DeleteMapping(value="/deletestaff/{empid}")

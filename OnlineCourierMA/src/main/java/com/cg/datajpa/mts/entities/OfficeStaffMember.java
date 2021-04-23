@@ -37,6 +37,8 @@ public class OfficeStaffMember {
 	@Column(name="mid")
 	int mid;
 	
+	
+	
 	public OfficeStaffMember(){}
 	
 	public OfficeStaffMember(String name, Address address, CourierOfficeOutlet office,int mid) {
@@ -75,10 +77,12 @@ public class OfficeStaffMember {
 	protected CourierOfficeOutlet getOffice() {
 		return office;
 	}
-	protected void setOffice(CourierOfficeOutlet office) {
+	public void setOffice(CourierOfficeOutlet office) {
 		this.office = office;
 	}
 	
+
+
 
 	@Override
 	public String toString() {
