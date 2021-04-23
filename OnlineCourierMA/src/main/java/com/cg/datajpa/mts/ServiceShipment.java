@@ -19,7 +19,7 @@ public class ServiceShipment {
 		//shipmentservice.initiateShipmentTransaction(courier);
 		//System.out.println(shipmentservice.checkShipmentStatus(courier));
 		
-		shipmentservice.initiateShipmentTransaction(courier);
+		shipmentservice.initiateShipmentTransaction(courier.getCourierid());
 		
 		//shipmentservice.rejectShipmentTransaction(courier);
 		try {

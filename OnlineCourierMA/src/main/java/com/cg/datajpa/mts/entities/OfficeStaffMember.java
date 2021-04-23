@@ -31,7 +31,7 @@ public class OfficeStaffMember {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="addid")
 	protected Address address;
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne()
 	@JoinColumn(name="officeid")
 	protected CourierOfficeOutlet office;
 	@Column(name="mid")

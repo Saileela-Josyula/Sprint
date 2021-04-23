@@ -76,8 +76,6 @@ public class ManagerController {
 		else {
 			return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
 		}
-					
-		
 	}
 	@Transactional
 	@DeleteMapping(value="/deletestaff/{empid}")

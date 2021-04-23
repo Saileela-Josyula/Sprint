@@ -40,10 +40,21 @@ public class OfficeController
 	}
 	@Transactional
 	@DeleteMapping(value="/delete")
-	public ResponseEntity<HttpStatus> deleteEmployee(@RequestBody CourierOfficeOutlet co)
-	{
-		officeservice.removeNewOffice(co);
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+	public ResponseEntity<HttpStatus> deleteOffice(@RequestBody int officeid)
+	{	CourierOfficeOutlet co=null;
+		try {
+			co=officeservice.getOfficeInfo(officeid);
+		}
+		catch(OutletNotFoundException ex) {
+			
+		}
+		if(co!=null) {
+			officeservice.removeNewOffice(co);
+			return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+		}
 	}
 	
 	@GetMapping(value="/{officeid}",produces="application/json")

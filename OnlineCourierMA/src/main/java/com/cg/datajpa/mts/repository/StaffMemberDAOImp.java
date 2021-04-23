@@ -33,8 +33,8 @@ public class StaffMemberDAOImp implements IStaffMemberDao {
 	public void removeStaffMember(OfficeStaffMember staffmember)
 	{
 		//em.getTransaction().begin();
-		OfficeStaffMember o=em.merge(staffmember);
-		em.remove(o);
+		//OfficeStaffMember o=em.merge(staffmember);
+		em.remove(staffmember);
 		//em.getTransaction().commit();
 	}
 
