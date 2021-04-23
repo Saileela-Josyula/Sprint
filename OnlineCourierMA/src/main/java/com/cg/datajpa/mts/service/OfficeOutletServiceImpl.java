@@ -76,7 +76,7 @@ public class OfficeOutletServiceImpl implements IOfficeOutletService {
 		boolean status=false;
 		LocalTime currentTime=java.time.LocalTime.now();
 		try {
-			if(currentTime.compareTo(officeoutlet.getOpeningTime())<0 && currentTime.compareTo(officeoutlet.getClosingTime())>=0)
+			if(officeoutlet.getOpeningTime().compareTo(currentTime)<0 && currentTime.compareTo(officeoutlet.getClosingTime())>=0)
 				status=true;
 			else
 				throw new OutletClosedException();

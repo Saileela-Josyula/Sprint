@@ -79,16 +79,17 @@ public class OfficeController
 		List<CourierOfficeOutlet> li=officeservice.getAllOfficesData();
 		return new ResponseEntity<List<CourierOfficeOutlet>>(li,HttpStatus.OK);
 	}
-	@Transactional
-	@PostMapping(value="/isofficeopen",consumes="application/json")
-	public  ResponseEntity<String> isOfficeOpen(@RequestBody CourierOfficeOutlet co) 
+	
+	@GetMapping(value="/isofficeopen",consumes="application/json")
+	public  ResponseEntity<String> isOfficeOpen(@RequestBody int courierid) 
 	{
 	
 		boolean x=false;
 		try {
+			CourierOfficeOutlet co=officeservice.getOfficeInfo(courierid);
 			x = officeservice.isOfficeOpen(co);
 		}
-		catch (OutletClosedException e) 
+		catch (Exception e) 
 		{
 		}
 		if(x) {
@@ -97,23 +98,25 @@ public class OfficeController
 		else
 			return  new ResponseEntity<String>("Office is closed", HttpStatus.OK);
 	}
-	@Transactional
-	@PostMapping(value="/isofficeclosed",consumes="application/json")
-	public ResponseEntity<String> isOfficeClosed(@RequestBody CourierOfficeOutlet co)
+	@GetMapping(value="/isofficeclosed",consumes="application/json")
+	public ResponseEntity<String> isOfficeClosed(@RequestBody int officeid)
 	{
 		boolean x=false;
 		try {
+			CourierOfficeOutlet co=officeservice.getOfficeInfo(officeid);
 			x = officeservice.isOfficeClosed(co);
 			
 		}
-		catch (OutletClosedException e) 
+		catch (Exception e) 
 		{
 		}
 		if(x) {
 			return  new ResponseEntity<String>("Office is Closed", HttpStatus.OK);
+			
 		}
 		else
-			return  new ResponseEntity<String>("Office is Open", HttpStatus.OK);
+			
+		return  new ResponseEntity<String>("Office is Open", HttpStatus.OK);
 	}
 	
 }
