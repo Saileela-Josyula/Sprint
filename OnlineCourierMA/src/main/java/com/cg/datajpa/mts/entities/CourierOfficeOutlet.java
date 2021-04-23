@@ -6,16 +6,21 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="officeoutlet")
 public class CourierOfficeOutlet {
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "office_Sequence")
+	@SequenceGenerator(name = "office_Sequence", sequenceName = "office_seq",allocationSize  =1,initialValue = 1)
 	@Column(name="officeid")
 	private int officeid;
 	@OneToOne(cascade = CascadeType.ALL)
@@ -33,10 +38,9 @@ public class CourierOfficeOutlet {
 	{}
 
 
-	public CourierOfficeOutlet(int officeid, Address address, LocalTime openingTime, LocalTime closingTime,
+	public CourierOfficeOutlet( Address address, LocalTime openingTime, LocalTime closingTime,
 			List<OfficeStaffMember> staffmembers) {
 		super();
-		this.officeid = officeid;
 		this.address = address;
 		this.openingTime = openingTime;
 		this.closingTime = closingTime;
@@ -46,11 +50,6 @@ public class CourierOfficeOutlet {
 
 	public int getOfficeid() {
 		return officeid;
-	}
-
-
-	public void setOfficeid(int officeid) {
-		this.officeid = officeid;
 	}
 
 

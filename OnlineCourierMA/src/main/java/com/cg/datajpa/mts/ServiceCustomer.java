@@ -12,6 +12,7 @@ public class ServiceCustomer {
 		CustomerServiceImp serviceCustomer=new CustomerServiceImp();
 		serviceCustomer.setC(new CourierDAOImp());
 		serviceCustomer.setCdoa(new ComplaintDaoImpl());
+		/*
 		try {
 			serviceCustomer.initiateProcess(4);
 		}
@@ -31,8 +32,8 @@ public class ServiceCustomer {
 		catch(CourierNotFoundException ex) {
 			
 		}
-		
-		Complaint complaint=new Complaint(403,234,"Missing Produce","All products were not there,something are missing",null);
+		*/
+		Complaint complaint=new Complaint(701,"Missing Products","All products were not there,something are missing",null);
 		serviceCustomer.registerComplaint(complaint);
 		
 	

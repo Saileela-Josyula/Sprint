@@ -25,8 +25,8 @@ public class ServiceManager {
 		serviceManager.setCourierDAOImp(new CourierDAOImp());
 		serviceManager.setComplaintDAOImp(new ComplaintDaoImpl());
 		
-		OfficeStaffMember s1=new OfficeStaffMember(709,"Megha",null,null,201);
-		OfficeStaffMember s2=new OfficeStaffMember(710,"Pratyush",null,null,201);
+		OfficeStaffMember s1=new OfficeStaffMember("Megha",null,null,201);
+		OfficeStaffMember s2=new OfficeStaffMember("Pratyush",null,null,201);
 		//serviceManager.addStaffMember(s2);
 		
 		//serviceManager.removeStaffMember(s1);
@@ -37,7 +37,7 @@ public class ServiceManager {
 			
 		}
 		
-		Courier courier=new Courier(4,CourierStatus.iniated,null,null,234,LocalDate.now(),LocalDate.parse("2021-04-25"));
+		Courier courier=new Courier(CourierStatus.iniated,null,null,LocalDate.now(),LocalDate.parse("2021-04-25"));
 		try {
 			System.out.println(serviceManager.getCourierStatus(courier));
 		}
@@ -56,8 +56,8 @@ public class ServiceManager {
 		for(Complaint c:complaints) {
 			System.out.println(c);
 		}
-		Address address=new Address(606,"139","Jamshedpur","Jharkhand","India",831001);
-		CourierOfficeOutlet office=new CourierOfficeOutlet(100,address,null,null,null);
+		Address address=new Address("139","Jamshedpur","Jharkhand","India",831001);
+		CourierOfficeOutlet office=new CourierOfficeOutlet(address,null,null,null);
 		List<OfficeStaffMember> data=serviceManager.getAllStaffMembers(office);
 		for(OfficeStaffMember member:data) {
 			System.out.println(member);

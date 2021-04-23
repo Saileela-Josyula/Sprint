@@ -13,7 +13,7 @@ public class ServiceShipment {
 		ShipmentServiceImp shipmentservice=new ShipmentServiceImp();
 		shipmentservice.setCourdao(new CourierDAOImp());
 		
-		Courier courier=new Courier(4,CourierStatus.iniated,null,null,234,LocalDate.now(),LocalDate.parse("2021-04-25"));
+		Courier courier=new Courier(CourierStatus.iniated,null,null,LocalDate.now(),LocalDate.parse("2021-04-25"));
 		//System.out.println(shipmentservice.checkShipmentStatus(courier));
 		
 		//shipmentservice.initiateShipmentTransaction(courier);

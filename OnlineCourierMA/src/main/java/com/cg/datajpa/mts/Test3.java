@@ -10,10 +10,10 @@ public class Test3 {
 	public static void main(String[] args) {
 		
 		ComplaintDaoImpl complaintdao=new ComplaintDaoImpl();
-		Complaint complaint=new Complaint(402,23102,"Damaged Product","Products inside courier was damaged when I received it, also packaging was damaged",null);
+		Complaint complaint=new Complaint(23102,"Damaged Product","Products inside courier was damaged when I received it, also packaging was damaged",null);
 		//complaintdao.addNewComplaint(complaint);
 		//complaintdao.removeComplaint(complaint);
-		Complaint complaintUpdated=new Complaint(402,23102,"Damaged Product","Products inside courier was damaged when I received it",null);
+		Complaint complaintUpdated=new Complaint(23102,"Damaged Product","Products inside courier was damaged when I received it",null);
 		//complaintdao.updateComplaint(complaintUpdated);
 		try {
 			System.out.println(complaintdao.getComplaint(401));

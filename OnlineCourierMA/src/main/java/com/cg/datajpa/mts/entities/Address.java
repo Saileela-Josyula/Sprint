@@ -2,13 +2,18 @@ package com.cg.datajpa.mts.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="address")
 public class Address {
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "address_Sequence")
+	@SequenceGenerator(name = "address_Sequence", sequenceName = "address_seq",allocationSize  =1,initialValue = 1)
 	@Column(name="addid")
 	private int addressId;
 	@Column(name="street")
@@ -29,9 +34,8 @@ public class Address {
 	
 
 	
-	public Address(int addressId, String street, String city, String state, String country, int zip) {
+	public Address( String street, String city, String state, String country, int zip) {
 		super();
-		this.addressId = addressId;
 		this.street = street;
 		this.city = city;
 		this.state = state;
@@ -44,10 +48,6 @@ public class Address {
 
 	public int getAddressId() {
 		return addressId;
-	}
-
-	public void setAddressId(int addressId) {
-		this.addressId = addressId;
 	}
 
 	public String getStreet() {

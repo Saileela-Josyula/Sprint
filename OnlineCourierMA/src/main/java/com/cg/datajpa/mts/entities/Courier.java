@@ -5,16 +5,23 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="courier")
 public class Courier {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "courier_Sequence")
+	@SequenceGenerator(name = "courier_Sequence", sequenceName = "courier_seq",allocationSize  =1,initialValue = 1)
 	@Column(name="courierid")
 	private int courierid;
 	@Column(name="status")
@@ -28,31 +35,27 @@ public class Courier {
 	@Column(name="consignmentno")
 	private int consignmentno;
 	@Column(name="initiateddate")
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-mm-yyyy")
 	private LocalDate initiatedDate;
 	@Column(name="deliverydate")
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-mm-yyyy")
 	private LocalDate deliveredDate;
 	
 	public Courier()
 	{}
 
-	public Courier(int courierid, CourierStatus status, Customer sender, Customer receiver, int consignmentno,
+	public Courier(CourierStatus status, Customer sender, Customer receiver,
 			LocalDate initiatedDate, LocalDate deliveredDate) {
 		super();
-		this.courierid = courierid;
 		this.status = status;
 		this.sender = sender;
 		this.receiver = receiver;
-		this.consignmentno = consignmentno;
 		this.initiatedDate = initiatedDate;
 		this.deliveredDate = deliveredDate;
 	}
 
 	public int getCourierid() {
 		return courierid;
-	}
-
-	public void setCourierid(int courierid) {
-		this.courierid = courierid;
 	}
 
 	public CourierStatus getStatus() {
@@ -81,10 +84,6 @@ public class Courier {
 
 	public int getConsignmentno() {
 		return consignmentno;
-	}
-
-	public void setConsignmentno(int consignmentno) {
-		this.consignmentno = consignmentno;
 	}
 
 	public LocalDate getInitiatedDate() {
