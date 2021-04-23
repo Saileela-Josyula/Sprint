@@ -25,8 +25,8 @@ public class ServiceManager {
 		serviceManager.setCourierDAOImp(new CourierDAOImp());
 		serviceManager.setComplaintDAOImp(new ComplaintDaoImpl());
 		
-		OfficeStaffMember s1=new OfficeStaffMember("Megha",null,null,201);
-		OfficeStaffMember s2=new OfficeStaffMember("Pratyush",null,null,201);
+		OfficeStaffMember s1=new OfficeStaffMember("Megha",null,201);
+		OfficeStaffMember s2=new OfficeStaffMember("Pratyush",null,201);
 		//serviceManager.addStaffMember(s2);
 		
 		//serviceManager.removeStaffMember(s1);

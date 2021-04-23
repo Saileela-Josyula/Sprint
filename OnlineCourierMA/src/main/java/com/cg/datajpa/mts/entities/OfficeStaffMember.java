@@ -31,9 +31,6 @@ public class OfficeStaffMember {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="addid")
 	protected Address address;
-	@ManyToOne()
-	@JoinColumn(name="officeid")
-	protected CourierOfficeOutlet office;
 	@Column(name="mid")
 	int mid;
 	
@@ -41,11 +38,10 @@ public class OfficeStaffMember {
 	
 	public OfficeStaffMember(){}
 	
-	public OfficeStaffMember(String name, Address address, CourierOfficeOutlet office,int mid) {
+	public OfficeStaffMember(String name, Address address,int mid) {
 		super();
 		this.name = name;
 		this.address = address;
-		this.office = office;
 		this.mid=mid;
 	}
 
@@ -58,30 +54,22 @@ public class OfficeStaffMember {
 		this.mid = mid;
 	}
 
-	protected int getEmpid() {
+	public int getEmpid() {
 		return empid;
 	}
-	protected String getName() {
+	public String getName() {
 		return name;
 	}
-	protected void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
-	protected Address getAddress() {
+	public Address getAddress() {
 		return address;
 	}
-	protected void setAddress(Address address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 	
-	protected CourierOfficeOutlet getOffice() {
-		return office;
-	}
-	public void setOffice(CourierOfficeOutlet office) {
-		this.office = office;
-	}
-	
-
 
 
 	@Override

@@ -33,6 +33,10 @@ public class OfficeOutletDaoImpl implements IOfficeOutletDao {
 		em.remove(managed);
 		//em.getTransaction().commit();
 	}
+	
+	public void updateOffice(CourierOfficeOutlet officeoutlet) {
+		em.merge(officeoutlet);
+	}
 
 	@Override
 	public CourierOfficeOutlet getOfficeInfo(int officeid) throws OutletNotFoundException {

@@ -67,8 +67,11 @@ public class OfficeController
 			
 		}
 		
-		if(e!=null)
+		if(e.isPresent())
+		{
 			return new ResponseEntity <Optional<CourierOfficeOutlet>>(e,HttpStatus.OK);
+		}
+			
 		else
 			return new ResponseEntity<Optional<CourierOfficeOutlet>>(HttpStatus.NOT_FOUND);	
 	}

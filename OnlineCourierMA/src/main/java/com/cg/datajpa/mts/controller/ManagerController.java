@@ -64,18 +64,17 @@ public class ManagerController {
 	@Transactional
 	@PostMapping(value="/addstaff" ,consumes="application/json")
 	public ResponseEntity<HttpStatus> addOfficeStaff(@RequestBody OfficeMember osm)
-	{	CourierOfficeOutlet office=null;
+	{	boolean status=false;
 		try {
-			office=officeService.getOfficeInfo(osm.getOfficeid());
-		}catch(OutletNotFoundException ex) {}
-		if(office!=null) {
-			osm.getMember().setOffice(office);
-			managerService.addStaffMember(osm.getMember());
+			managerService.addStaffMember(osm.getMember(),osm.getOfficeid());
+			status=true;
+			
+		}catch(OutletNotFoundException ex) {	}
+		if(status)
 			return new ResponseEntity<HttpStatus>(HttpStatus.OK);
-		}
-		else {
+		else
 			return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
-		}
+		
 	}
 	@Transactional
 	@DeleteMapping(value="/deletestaff/{empid}")

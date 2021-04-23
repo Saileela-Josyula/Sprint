@@ -14,9 +14,11 @@ import com.cg.datajpa.mts.entities.CourierStatus;
 import com.cg.datajpa.mts.entities.OfficeStaffMember;
 import com.cg.datajpa.mts.exception.ComplaintNotFoundException;
 import com.cg.datajpa.mts.exception.CourierNotFoundException;
+import com.cg.datajpa.mts.exception.OutletNotFoundException;
 import com.cg.datajpa.mts.exception.StaffMemberNotFoundException;
 import com.cg.datajpa.mts.repository.ComplaintDaoImpl;
 import com.cg.datajpa.mts.repository.CourierDAOImp;
+import com.cg.datajpa.mts.repository.OfficeOutletDaoImpl;
 import com.cg.datajpa.mts.repository.StaffMemberDAOImp;
 import com.cg.datajpa.mts.repository.ComplaintDaoImpl;
 import com.cg.datajpa.mts.repository.CourierDAOImp;
@@ -39,10 +41,22 @@ public class ManagerServiceImpl implements IManagerService {
 	public void setComplaintDAOImp(ComplaintDaoImpl complaintDAO) {
 		this.d=complaintDAO;
 	}
+	
+	@Autowired
+	OfficeOutletDaoImpl officeDao;
+	public void setOfficeDao(OfficeOutletDaoImpl officeDao) {
+		this.officeDao = officeDao;
+	}
+
 	@Override
-	public void addStaffMember(OfficeStaffMember staffmember) {
+	public void addStaffMember(OfficeStaffMember staffmember,int officeid) throws OutletNotFoundException{
 		// TODO Auto-generated method stub
-		dao.addStaffMember(staffmember);
+	
+			CourierOfficeOutlet office= officeDao.getOfficeInfo(officeid);
+			List<OfficeStaffMember> members=office.getStaffmembers();
+			members.add(staffmember);
+			officeDao.updateOffice(office);
+	
 	}
 
 	@Override

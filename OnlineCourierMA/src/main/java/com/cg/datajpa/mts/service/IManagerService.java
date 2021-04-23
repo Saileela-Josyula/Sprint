@@ -9,11 +9,12 @@ import com.cg.datajpa.mts.entities.CourierStatus;
 import com.cg.datajpa.mts.entities.OfficeStaffMember;
 import com.cg.datajpa.mts.exception.ComplaintNotFoundException;
 import com.cg.datajpa.mts.exception.CourierNotFoundException;
+import com.cg.datajpa.mts.exception.OutletNotFoundException;
 import com.cg.datajpa.mts.exception.StaffMemberNotFoundException;
 
 public interface IManagerService {
 
-	public void addStaffMember(OfficeStaffMember staffmember);
+	public void addStaffMember(OfficeStaffMember staffmember,int officeid)throws OutletNotFoundException;
 	public void removeStaffMember(OfficeStaffMember staffmember);
 	
 	public OfficeStaffMember getStaffMember(int empid) throws StaffMemberNotFoundException;

@@ -23,8 +23,8 @@ public class Test2 {
 		newOffice.setAddress(a1);
 		newOffice.setOpeningTime(LocalTime.parse("08:00:00"));
 		newOffice.setClosingTime(LocalTime.parse("19:00:00"));
-		OfficeStaffMember s1=new OfficeStaffMember("Vivek",a1,newOffice,202);
-		OfficeStaffMember s2=new OfficeStaffMember("Santosh",a1,newOffice,202);
+		OfficeStaffMember s1=new OfficeStaffMember("Vivek",a1,202);
+		OfficeStaffMember s2=new OfficeStaffMember("Santosh",a1,202);
 		List<OfficeStaffMember> employees=Arrays.asList(s1,s2);
 		newOffice.setStaffmembers(employees);
 		System.out.println(newOffice);

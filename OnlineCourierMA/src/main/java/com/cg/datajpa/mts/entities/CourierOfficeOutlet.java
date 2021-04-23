@@ -30,7 +30,8 @@ public class CourierOfficeOutlet {
 	private LocalTime openingTime;
 	@Column(name="closingtime")
 	private LocalTime closingTime;
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="office")
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="officeid")
 	private List<OfficeStaffMember> staffmembers;
 	
 	
