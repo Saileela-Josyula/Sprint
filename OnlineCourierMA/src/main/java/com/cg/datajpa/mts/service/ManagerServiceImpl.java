@@ -26,24 +26,24 @@ import com.cg.datajpa.mts.repository.CourierDAOImp;
 @Service
 public class ManagerServiceImpl implements IManagerService {
 	@Autowired
-	StaffMemberDAOImp dao;
+	StaffMemberDAOImp staffMemberDao;
 
 	public void setStaffMemberDAOImpl(StaffMemberDAOImp staffDAO) {
-		this.dao = staffDAO;
+		this.staffMemberDao = staffDAO;
 	}
 
 	@Autowired
-	CourierDAOImp da;
+	CourierDAOImp couerirDao;
 
 	public void setCourierDAOImp(CourierDAOImp courierDAO) {
-		this.da = courierDAO;
+		this.couerirDao = courierDAO;
 	}
 
 	@Autowired
-	ComplaintDaoImpl d;
+	ComplaintDaoImpl complaintDao;
 
 	public void setComplaintDAOImp(ComplaintDaoImpl complaintDAO) {
-		this.d = complaintDAO;
+		this.complaintDao = complaintDAO;
 	}
 
 	@Autowired
@@ -71,7 +71,7 @@ public class ManagerServiceImpl implements IManagerService {
 	@Override
 	public void removeStaffMember(OfficeStaffMember staffmember) {
 		// TODO Auto-generated method stub
-		dao.removeStaffMember(staffmember);
+		staffMemberDao.removeStaffMember(staffmember);
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class ManagerServiceImpl implements IManagerService {
 		// TODO Auto-generated method stub
 		OfficeStaffMember member = null;
 		try {
-			member = dao.getStaffMember(empid);
+			member = staffMemberDao.getStaffMember(empid);
 		} catch (StaffMemberNotFoundException ex) {
 
 		}
@@ -94,7 +94,7 @@ public class ManagerServiceImpl implements IManagerService {
 	public List<OfficeStaffMember> getAllStaffMembers(CourierOfficeOutlet officeoutlet) {
 		// TODO Auto-generated method stub
 		List<OfficeStaffMember> data = new ArrayList<>();
-		data = dao.getAllStaffMembers(officeoutlet);
+		data = staffMemberDao.getAllStaffMembers(officeoutlet);
 		return data;
 	}
 
@@ -103,7 +103,7 @@ public class ManagerServiceImpl implements IManagerService {
 		// TODO Auto-generated method stub
 		Courier updatedcourier = null;
 
-		updatedcourier = da.getCourierInfo(courier.getCourierid());
+		updatedcourier = couerirDao.getCourierInfo(courier.getCourierid());
 
 		if (updatedcourier == null) {
 			throw new CourierNotFoundException("Courier not found");
@@ -118,7 +118,7 @@ public class ManagerServiceImpl implements IManagerService {
 		// TODO Auto-generated method stub
 		Complaint member = null;
 		try {
-			member = d.getComplaint(complaintid);
+			member = complaintDao.getComplaint(complaintid);
 		} catch (ComplaintNotFoundException ex) {
 
 		}
@@ -129,13 +129,13 @@ public class ManagerServiceImpl implements IManagerService {
 	public List<Complaint> getAllComplaints() {
 		// TODO Auto-generated method stub
 		List<Complaint> data = new ArrayList<>();
-		data = d.getAllComplaints();
+		data = complaintDao.getAllComplaints();
 		return data;
 	}
 
 	public List<Courier> getAllDeliveredCouriers() {
 		List<Courier> couriers = new ArrayList<>();
-		couriers = da.getAllDeliveredCouriers();
+		couriers = couerirDao.getAllDeliveredCouriers();
 		return couriers;
 	}
 }

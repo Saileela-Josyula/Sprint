@@ -6,9 +6,9 @@ import com.cg.datajpa.mts.exception.CourierNotFoundException;
 
 public interface IShipmentService {
 
-	public void initiateShipmentTransaction(int courierid);
+	public boolean initiateShipmentTransaction(int courierid);
 	public CourierStatus checkShipmentStatus(Courier courier) throws CourierNotFoundException;
-	public void closeShipmentTransaction(int courierid);
-	public void rejectShipmentTransaction(int courierid);
+	public boolean closeShipmentTransaction(int courierid);
+	public boolean rejectShipmentTransaction(int courierid);
 	
 }
