@@ -60,9 +60,12 @@ public class ManagerController {
 	public void setStaffDAO(StaffMemberDAOImp staffDAO) {
 		this.staffDAO = staffDAO;
 	}
+
 	/*
 	 * Method:addOfficeStaff add staff member using office id
+	 * 
 	 * @Transactional
+	 * 
 	 * @PostMapping CreatedBy:Ede Chandini CreatedDate:23 April 2021
 	 */
 	@Transactional
@@ -73,16 +76,20 @@ public class ManagerController {
 			managerService.addStaffMember(officeStaffMember.getMember(), officeStaffMember.getOfficeid());
 			status = true;
 
-		} catch (OutletNotFoundException ex) {}
+		} catch (OutletNotFoundException ex) {
+		}
 		if (status)
-			return new ResponseEntity<>("Office member added successfully",HttpStatus.OK);
+			return new ResponseEntity<>("Office member added successfully", HttpStatus.OK);
 		else
-			return new ResponseEntity<>("There was an error, please try again",HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>("There was an error, please try again", HttpStatus.NO_CONTENT);
 
 	}
+
 	/*
 	 * Method:deleteOfficeStaff remove staff member using employee id
+	 * 
 	 * @Transactional
+	 * 
 	 * @DeleteMapping CreatedBy:Ede Chandini CreatedDate:23 April 2021
 	 */
 	@Transactional
@@ -91,7 +98,8 @@ public class ManagerController {
 		OfficeStaffMember member = null;
 		try {
 			member = staffDAO.getStaffMember(empid);
-		} catch (StaffMemberNotFoundException ex) {}
+		} catch (StaffMemberNotFoundException ex) {
+		}
 		if (member != null) {
 			managerService.removeStaffMember(member);
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -99,6 +107,7 @@ public class ManagerController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+
 	/*
 	 * Method:getCourierStatus check status of any courier using courier id
 	 * 
@@ -110,21 +119,31 @@ public class ManagerController {
 		try {
 			status = Optional.ofNullable(customerService.checkOnlineTrackingStatus(courierid));
 		} catch (CourierNotFoundException ex) {
-
 		}
-		if (status != null) {
-			return new ResponseEntity<Optional<CourierStatus>>(status, HttpStatus.OK);
+		if (status == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else
-			return new ResponseEntity<Optional<CourierStatus>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(status, HttpStatus.OK);
+
 	}
 
+	/*
+	 * Method:getAllComplaint show all complaints in database
+	 * 
+	 * @GetMapping CreatedBy:Venkatesh Murty CreatedDate:23 April 2021
+	 */
 	@GetMapping(value = "/complaint/all", produces = "application/json")
 	public ResponseEntity<List<Complaint>> getAllComplaint() {
-		return new ResponseEntity<List<Complaint>>(managerService.getAllComplaints(), HttpStatus.OK);
+		return new ResponseEntity<>(managerService.getAllComplaints(), HttpStatus.OK);
 	}
 
+	/*
+	 * Method:getAllDeliveredCourier fetch all couriers which are delivered
+	 * 
+	 * @GetMapping CreatedBy:Venkatesh Murty CreatedDate:23 April 2021
+	 */
 	@GetMapping(value = "/courier/alldelivered", produces = "application/json")
 	public ResponseEntity<List<Courier>> getAllDeliveredCourier() {
-		return new ResponseEntity<List<Courier>>(managerService.getAllDeliveredCouriers(), HttpStatus.OK);
+		return new ResponseEntity<>(managerService.getAllDeliveredCouriers(), HttpStatus.OK);
 	}
 }

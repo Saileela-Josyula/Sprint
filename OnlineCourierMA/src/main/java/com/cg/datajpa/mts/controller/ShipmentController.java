@@ -26,7 +26,7 @@ public class ShipmentController {
 	ShipmentServiceImp shipmentService;
 	@Autowired
 	CourierDAOImp courierDao;
-	
+
 	public void setCourierDao(CourierDAOImp courierDao) {
 		this.courierDao = courierDao;
 	}
@@ -34,38 +34,63 @@ public class ShipmentController {
 	public void setShipmentService(ShipmentServiceImp shipmentService) {
 		this.shipmentService = shipmentService;
 	}
+	/*
+	 * Method:initiateShipmentTransaction update status of a courier using courier id
+	 * 
+	 * @Transactional
+	 * 
+	 * @PutMapping CreatedBy:Deepti Pavanika CreatedDate:23 April 2021
+	 */
 	@Transactional
-	@PutMapping(value="/initiate",consumes = "application/json")
+	@PutMapping(value = "/initiate", consumes = "application/json")
 	public ResponseEntity<HttpStatus> initiateShipmentTransaction(@RequestBody int courierid) {
 		shipmentService.initiateShipmentTransaction(courierid);
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
-	@GetMapping(value="/courier/{courierid}",produces="application/json")
+	/*
+	 * Method:checkShipmentStatus check status of a courier using courier id
+	 * 
+	 *
+	 * 
+	 * @GetMapping CreatedBy:Deepti Pavanika CreatedDate:23 April 2021
+	 */
+	@GetMapping(value = "/courier/{courierid}", produces = "application/json")
 	public ResponseEntity<Optional<CourierStatus>> checkShipmentStatus(@PathVariable("courierid") int courierid) {
-		Optional<CourierStatus> s =null;
+		Optional<CourierStatus> status = null;
 		try {
-		Courier c = courierDao.getCourierInfo(courierid);
-		s= Optional.ofNullable(shipmentService.checkShipmentStatus(c));
+			Courier courier = courierDao.getCourierInfo(courierid);
+			status = Optional.ofNullable(shipmentService.checkShipmentStatus(courier));
+		} catch (CourierNotFoundException ex) {
 		}
-		catch(CourierNotFoundException ex) {	
-		}
-		if(s!=null)
-			return new ResponseEntity<Optional<CourierStatus>>(s,HttpStatus.OK);
+		if (status != null)
+			return new ResponseEntity<>(status, HttpStatus.OK);
 		else
-			return new ResponseEntity<Optional<CourierStatus>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
+	/*
+	 * Method:closeShipmentTransaction update status of a courier using courier id
+	 * 
+	 * @Transactional
+	 * 
+	 * @PutMapping CreatedBy:Deepti Pavanika CreatedDate:23 April 2021
+	 */
 	@Transactional
-	@PutMapping(value="/close",consumes = "application/json")
+	@PutMapping(value = "/close", consumes = "application/json")
 	public ResponseEntity<HttpStatus> closeShipmentTransaction(@RequestBody int courierid) {
 		shipmentService.closeShipmentTransaction(courierid);
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	/*
+	 * Method:rejectShipmentTransaction update status of a courier using courier id
+	 * 
+	 * @Transactional
+	 * 
+	 * @PutMapping CreatedBy:Deepti Pavanika CreatedDate:23 April 2021
+	 */
 	@Transactional
-	@PutMapping(value="/reject",consumes = "application/json")
+	@PutMapping(value = "/reject", consumes = "application/json")
 	public ResponseEntity<HttpStatus> rejectShipmentTransaction(@RequestBody int courierid) {
 		shipmentService.rejectShipmentTransaction(courierid);
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
 }

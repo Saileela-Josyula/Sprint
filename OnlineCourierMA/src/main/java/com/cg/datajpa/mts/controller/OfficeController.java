@@ -16,110 +16,130 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.datajpa.mts.entities.CourierOfficeOutlet;
-import com.cg.datajpa.mts.exception.CourierNotFoundException;
-import com.cg.datajpa.mts.exception.OutletClosedException;
 import com.cg.datajpa.mts.exception.OutletNotFoundException;
 import com.cg.datajpa.mts.service.OfficeOutletServiceImpl;
 
 @RestController
 @RequestMapping("/office")
-public class OfficeController
-{
+public class OfficeController {
 	@Autowired
 	OfficeOutletServiceImpl officeservice;
-	
+
 	public void setOfficeservice(OfficeOutletServiceImpl officeservice) {
 		this.officeservice = officeservice;
 	}
+
+	/*
+	 * Method:addOffice add office to database
+	 * 
+	 * @Transactional
+	 * 
+	 * @PostMapping CreatedBy:Pankaj Kumar Singh CreatedDate:23 April 2021
+	 */
 	@Transactional
-	@PostMapping(value="/addoffice",consumes="application/json")
-	public ResponseEntity<HttpStatus> add(@RequestBody CourierOfficeOutlet co)
-	{
-		officeservice.addNewOffice(co);
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+	@PostMapping(value = "/addoffice", consumes = "application/json")
+	public ResponseEntity<HttpStatus> addOffice(@RequestBody CourierOfficeOutlet courierOffice) {
+		officeservice.addNewOffice(courierOffice);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
+
+	/*
+	 * Method:deleteOffice delete office and related data to it using office id
+	 * 
+	 * @Transactional
+	 * 
+	 * @DeleteMapping CreatedBy:Pankaj Kumar Singh CreatedDate:23 April 2021
+	 */
 	@Transactional
-	@DeleteMapping(value="/delete")
-	public ResponseEntity<HttpStatus> deleteOffice(@RequestBody int officeid)
-	{	CourierOfficeOutlet co=null;
+	@DeleteMapping(value = "/delete")
+	public ResponseEntity<HttpStatus> deleteOffice(@RequestBody int officeid) {
+		CourierOfficeOutlet office = null;
 		try {
-			co=officeservice.getOfficeInfo(officeid);
+			office = officeservice.getOfficeInfo(officeid);
+		} catch (OutletNotFoundException ex) {
 		}
-		catch(OutletNotFoundException ex) {
-			
-		}
-		if(co!=null) {
-			officeservice.removeNewOffice(co);
-			return new ResponseEntity<HttpStatus>(HttpStatus.OK);
-		}
-		else {
-			return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+		if (office != null) {
+			officeservice.removeNewOffice(office);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 	}
-	
-	@GetMapping(value="/{officeid}",produces="application/json")
-	public ResponseEntity<Optional<CourierOfficeOutlet>> getOffice(@PathVariable("officeid")int officeid) 
-	{	Optional<CourierOfficeOutlet> e=null;
+
+	/*
+	 * Method:getOffice fetch details of an office using office id
+	 * 
+	 *
+	 * 
+	 * @GetMapping CreatedBy:Pankaj Kumar Singh CreatedDate:23 April 2021
+	 */
+	@GetMapping(value = "/{officeid}", produces = "application/json")
+	public ResponseEntity<Optional<CourierOfficeOutlet>> getOffice(@PathVariable("officeid") int officeid) {
+		Optional<CourierOfficeOutlet> office = null;
 		try {
-			 e =Optional.ofNullable(officeservice.getOfficeInfo(officeid));
+			office = Optional.ofNullable(officeservice.getOfficeInfo(officeid));
+		} catch (OutletNotFoundException ex) {
 		}
-		catch(OutletNotFoundException ex) {
-			
-		}
-		
-		if(e.isPresent())
-		{
-			return new ResponseEntity <Optional<CourierOfficeOutlet>>(e,HttpStatus.OK);
-		}
-			
-		else
-			return new ResponseEntity<Optional<CourierOfficeOutlet>>(HttpStatus.NOT_FOUND);	
+		if (office == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else
+			return new ResponseEntity<>(office, HttpStatus.OK);
 	}
-	
-	@GetMapping(value="/all",produces="application/json")
-	public ResponseEntity<List<CourierOfficeOutlet>>  getAllOfficesData()
-	{
-		List<CourierOfficeOutlet> li=officeservice.getAllOfficesData();
-		return new ResponseEntity<List<CourierOfficeOutlet>>(li,HttpStatus.OK);
+
+	/*
+	 * Method:getAllOfficesData fetch details of all office present in database
+	 * 
+	 *
+	 * 
+	 * @GetMapping CreatedBy:Saileela CreatedDate:23 April 2021
+	 */
+	@GetMapping(value = "/all", produces = "application/json")
+	public ResponseEntity<List<CourierOfficeOutlet>> getAllOfficesData() {
+		List<CourierOfficeOutlet> offices = officeservice.getAllOfficesData();
+		return new ResponseEntity<>(offices, HttpStatus.OK);
 	}
-	
-	@GetMapping(value="/isofficeopen",consumes="application/json")
-	public  ResponseEntity<String> isOfficeOpen(@RequestBody int courierid) 
-	{
-	
-		boolean x=false;
+
+	/*
+	 * Method:isOfficeOpen check whether office is open using office id
+	 * 
+	 *
+	 * 
+	 * @GetMapping CreatedBy:Saileela CreatedDate:23 April 2021
+	 */
+	@GetMapping(value = "/isofficeopen", consumes = "application/json")
+	public ResponseEntity<String> isOfficeOpen(@RequestBody int courierid) {
+
+		boolean status = false;
 		try {
-			CourierOfficeOutlet co=officeservice.getOfficeInfo(courierid);
-			x = officeservice.isOfficeOpen(co);
+			CourierOfficeOutlet office = officeservice.getOfficeInfo(courierid);
+			status = officeservice.isOfficeOpen(office);
+		} catch (Exception e) {
 		}
-		catch (Exception e) 
-		{
-		}
-		if(x) {
-			return  new ResponseEntity<String>("Office is Open", HttpStatus.OK);
-		}
-		else
-			return  new ResponseEntity<String>("Office is closed", HttpStatus.OK);
+		if (status) {
+			return new ResponseEntity<>("Office is Open", HttpStatus.OK);
+		} else
+			return new ResponseEntity<>("Office is closed", HttpStatus.OK);
 	}
-	@GetMapping(value="/isofficeclosed",consumes="application/json")
-	public ResponseEntity<String> isOfficeClosed(@RequestBody int officeid)
-	{
-		boolean x=false;
+
+	/*
+	 * Method:isOfficeClosed check whether office is closed using office id
+	 * 
+	 *
+	 * 
+	 * @GetMapping CreatedBy:Saileela CreatedDate:23 April 2021
+	 */
+	@GetMapping(value = "/isofficeclosed", consumes = "application/json")
+	public ResponseEntity<String> isOfficeClosed(@RequestBody int officeid) {
+		boolean status = false;
 		try {
-			CourierOfficeOutlet co=officeservice.getOfficeInfo(officeid);
-			x = officeservice.isOfficeClosed(co);
-			
+			CourierOfficeOutlet office = officeservice.getOfficeInfo(officeid);
+			status = officeservice.isOfficeClosed(office);
+		} catch (Exception e) {
 		}
-		catch (Exception e) 
-		{
-		}
-		if(x) {
-			return  new ResponseEntity<String>("Office is Closed", HttpStatus.OK);
-			
-		}
-		else
-			
-		return  new ResponseEntity<String>("Office is Open", HttpStatus.OK);
+		if (status) {
+			return new ResponseEntity<>("Office is Closed", HttpStatus.OK);
+		} else
+			return new ResponseEntity<>("Office is Open", HttpStatus.OK);
 	}
-	
+
 }

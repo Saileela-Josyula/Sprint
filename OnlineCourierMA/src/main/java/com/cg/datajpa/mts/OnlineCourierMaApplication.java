@@ -11,5 +11,4 @@ public class OnlineCourierMaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OnlineCourierMaApplication.class, args);
 	}
-
 }
