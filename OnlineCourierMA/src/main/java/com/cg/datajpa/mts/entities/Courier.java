@@ -34,24 +34,19 @@ public class Courier {
 	private Customer receiver;
 	@Column(name="consignmentno")
 	private int consignmentno;
-	@Column(name="initiateddate")
-	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-mm-yyyy")
+	@Column(name="initiateddate",columnDefinition = "DATE")
 	private LocalDate initiatedDate;
-	@Column(name="deliverydate")
-	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-mm-yyyy")
+	@Column(name="deliverydate",columnDefinition = "DATE")
 	private LocalDate deliveredDate;
 	
 	public Courier()
 	{}
 
-	public Courier(CourierStatus status, Customer sender, Customer receiver,
-			LocalDate initiatedDate, LocalDate deliveredDate) {
+	public Courier( Customer sender, Customer receiver) {
 		super();
-		this.status = status;
 		this.sender = sender;
 		this.receiver = receiver;
-		this.initiatedDate = initiatedDate;
-		this.deliveredDate = deliveredDate;
+		
 	}
 
 	public int getCourierid() {
@@ -60,6 +55,14 @@ public class Courier {
 
 	public CourierStatus getStatus() {
 		return status;
+	}
+	
+	public void setCourierid(int courierid) {
+		this.courierid = courierid;
+	}
+
+	public void setConsignmentno(int consignmentno) {
+		this.consignmentno = consignmentno;
 	}
 
 	public void setStatus(CourierStatus status) {

@@ -1,5 +1,7 @@
 package com.cg.datajpa.mts.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +33,6 @@ public class CustomerController
      {
     	 this.custService=custService;
      }
-     
      @Autowired
      CourierDAOImp courierDao;
     
@@ -40,28 +41,28 @@ public class CustomerController
 	}
 	@Transactional
 	@PostMapping(value="/addcourier",consumes="application/json")
-     public ResponseEntity<HttpStatus> initiateProcess(@RequestBody Courier courier) {
-    	 
-		courierDao.addCourierInfo(courier);
-		try {
-    		 custService.initiateProcess(courier.getCourierid());
-    	 }
-    	 catch(CourierNotFoundException ex) {
-    		 
-    	 } 
-    	 return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+     public ResponseEntity<String> initiateProcess(@RequestBody Courier courier) {
+    
+		boolean status=custService.initiateProcess(courier);
+		if(status)
+			return new ResponseEntity<String>("",HttpStatus.OK);
+		else
+			return new ResponseEntity<String>("There was an error,please try again",HttpStatus.NOT_ACCEPTABLE);
      }
      
      @GetMapping(value="/courier/{courierid}",produces="application/json")
-     public ResponseEntity<CourierStatus> checkOnlineTrackingStatus(@PathVariable("courierid") int courierid)
+     public ResponseEntity<Optional<CourierStatus>> checkOnlineTrackingStatus(@PathVariable("courierid") int courierid)
      {
-    	 CourierStatus cs=null;
+    	 Optional<CourierStatus> cs=null;
 		try {
-			cs = custService.checkOnlineTrackingStatus(courierid);
+			cs = Optional.ofNullable(custService.checkOnlineTrackingStatus(courierid));
 		} catch (CourierNotFoundException e) {
 			// TODO Auto-generated catch block
 		}
-    	 return new ResponseEntity<CourierStatus>(cs,HttpStatus.OK);
+		if(cs.isPresent())
+			return new ResponseEntity<Optional<CourierStatus>>(cs,HttpStatus.OK);
+		else
+			return new ResponseEntity<Optional<CourierStatus>>(HttpStatus.NO_CONTENT);
      }
      @Transactional
      @PostMapping(value="/complaint",consumes="application/json")
@@ -70,14 +71,14 @@ public class CustomerController
     	 return new ResponseEntity<HttpStatus>(HttpStatus.OK);
      }
      
-     @GetMapping(value="/payment/{processPaymentByCash}",consumes="application/json")
-     public ResponseEntity<HttpStatus> makePayment(@PathVariable("processPaymentByCash") String payment){
+     @GetMapping(value="/payment/{method}",consumes="application/json")
+     public ResponseEntity<String> makePayment(@PathVariable("method") String payment){
     	 if(payment.equals("card") || payment.equals("cash")) {
     		 custService.makePayment(payment);
-        	 return new ResponseEntity<HttpStatus>(HttpStatus.OK); 
+        	 return new ResponseEntity<String>("Thank you for using our service!",HttpStatus.OK); 
     	 }
     	 else {
-    		 return new ResponseEntity<HttpStatus>(HttpStatus.BAD_GATEWAY);
+    		 return new ResponseEntity<String>("Only cash/card methods allowed",HttpStatus.BAD_GATEWAY);
     	 }
     	
      }

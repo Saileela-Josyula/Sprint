@@ -15,16 +15,15 @@ public class ComplaintDaoImpl implements IComplaintDao
 {
 	@Autowired
 	EntityManager em;
-	
 	public ComplaintDaoImpl() {
 		em=JpaUtils.getEntityManager();
 	}
-	
 	@Override
-	public void addNewComplaint(Complaint complaint) {
+	public boolean addNewComplaint(Complaint complaint) {
 		//em.getTransaction().begin();
 		em.persist(complaint);
 		//em.getTransaction().commit();
+		return true;
 	}
 
 	

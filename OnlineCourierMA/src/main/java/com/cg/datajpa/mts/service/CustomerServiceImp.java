@@ -1,5 +1,8 @@
 package com.cg.datajpa.mts.service;
 
+import java.time.LocalDate;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,48 +15,46 @@ import com.cg.datajpa.mts.repository.CourierDAOImp;
 @Service
 public class CustomerServiceImp implements ICustomerService {
 	
-	
-	
 	@Autowired
 	CourierDAOImp c;	
-	public void setC(CourierDAOImp c) {
-		this.c = c;
-	}
-
+	
 	@Autowired
 	ComplaintDaoImpl cdao;
-	public void setCdoa(ComplaintDaoImpl cdao) {
-		this.cdao = cdao;
-	}
-	
+
 	@Autowired
 	PaymentsServiceImp paymentService;
-	public void setPaymentService(PaymentsServiceImp ps) {
-		this.paymentService=ps;
-	}
 	
-	@Override
-	public void initiateProcess(int courierid)throws CourierNotFoundException
-	{
-		// TODO Auto-generated method stub
-		CourierStatus st=CourierStatus.iniated;
-		Courier courier=c.getCourierInfo(courierid);
-		
-		 if(courier!=null)
-		 {
-			 courier.setStatus(st);
-			 c.updateCourierInfoSet(courierid, st);
-		 }
-		
-			 throw new CourierNotFoundException("Courier not found");			
+	
+
+	public CustomerServiceImp() {
+		super();
+		c=new CourierDAOImp();
+		cdao=new ComplaintDaoImpl();
+		paymentService=new PaymentsServiceImp();
 	}
 
 	@Override
-	public void makePayment(String method) {
-		if(method.equals("cash"))
+	public boolean initiateProcess(Courier courier)
+	{
+		courier.setStatus(CourierStatus.iniated);
+		Random random=new Random();
+		courier.setConsignmentno(random.nextInt(1000)+1000);
+		courier.setInitiatedDate(LocalDate.now());
+		courier.setDeliveredDate(LocalDate.now().plusDays(7));
+		return c.addCourierInfo(courier);
+	}
+
+	@Override
+	public String makePayment(String method) {
+		if(method.equals("cash")) {
 			paymentService.processPaymentByCash();
-		else if(method.equals("card"))
+			return "Payment done by cash";
+		}
+		else{
 			paymentService.processPaymentByCard();
+			return "Payment done by card";
+		}
+		
 			
 	}
 
@@ -75,8 +76,8 @@ public class CustomerServiceImp implements ICustomerService {
 	}
 
 	@Override
-	public void registerComplaint(Complaint complaint) {
+	public boolean registerComplaint(Complaint complaint) {
 		// TODO Auto-generated method stub
-		cdao.addNewComplaint(complaint);	
+		return cdao.addNewComplaint(complaint);	
 	}
 }

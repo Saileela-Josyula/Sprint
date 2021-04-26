@@ -11,7 +11,7 @@ import com.cg.datajpa.mts.entities.Courier;
 
 public interface ICourierDao {
 
-	public void addCourierInfo(Courier courier);
+	public boolean addCourierInfo(Courier courier);
 	public Courier getCourierInfo(int courierid) throws CourierNotFoundException;
 	public void removeCourierInfo(int courierid);
 	

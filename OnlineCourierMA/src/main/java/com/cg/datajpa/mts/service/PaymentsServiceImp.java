@@ -13,7 +13,7 @@ public class PaymentsServiceImp implements IPaymentService {
 
 	@Override
 	public void processPaymentByCard() {
-		System.out.println("Payment by cash method generated");
+		System.out.println("Payment by card method generated");
 
 	}
 

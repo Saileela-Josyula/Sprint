@@ -63,7 +63,7 @@ public class OfficeOutletServiceImpl implements IOfficeOutletService {
 				status=true;
 			}
 			else
-				throw new OutletClosedException();
+				throw new OutletClosedException("Outlet is closed");
 		}
 		catch(OutletClosedException ex) {
 			
@@ -79,7 +79,7 @@ public class OfficeOutletServiceImpl implements IOfficeOutletService {
 			if(officeoutlet.getOpeningTime().compareTo(currentTime)<0 && currentTime.compareTo(officeoutlet.getClosingTime())>=0)
 				status=true;
 			else
-				throw new OutletClosedException();
+				throw new OutletClosedException("Outlet is closed");
 		}
 		catch(OutletClosedException ex) {
 			

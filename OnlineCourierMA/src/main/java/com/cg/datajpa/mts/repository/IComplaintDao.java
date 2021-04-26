@@ -7,7 +7,7 @@ import com.cg.datajpa.mts.exception.ComplaintNotFoundException;
 
 public interface IComplaintDao {
 
-	public void addNewComplaint(Complaint complaint);
+	public boolean addNewComplaint(Complaint complaint);
 	public void removeComplaint(Complaint complaint);
 	public void updateComplaint(Complaint complaint);
 	

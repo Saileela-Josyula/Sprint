@@ -23,10 +23,17 @@ public class CourierDAOImp implements ICourierDao {
 		eManager=JpaUtils.getEntityManager();
 	}
 	@Override
-	public void addCourierInfo(Courier courier)
+	public boolean addCourierInfo(Courier courier)
 	{
 		//eManager.getTransaction().begin();
-		eManager.persist(courier);
+		try {
+			eManager.persist(courier);
+			return true;
+		}
+		catch(Exception ex) {
+			
+		}
+		return false;
 		//eManager.getTransaction().commit();
 	}
 	@Override
