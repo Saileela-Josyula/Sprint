@@ -15,11 +15,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.cg.datajpa.mts.entities.Complaint;
 import com.cg.datajpa.mts.entities.Courier;
+import com.cg.datajpa.mts.entities.CourierOfficeOutlet;
 import com.cg.datajpa.mts.entities.CourierStatus;
+import com.cg.datajpa.mts.entities.OfficeStaffMember;
 import com.cg.datajpa.mts.exception.ComplaintNotFoundException;
 import com.cg.datajpa.mts.exception.CourierNotFoundException;
+import com.cg.datajpa.mts.exception.OutletNotFoundException;
+import com.cg.datajpa.mts.exception.StaffMemberNotFoundException;
 import com.cg.datajpa.mts.repository.ComplaintDaoImpl;
 import com.cg.datajpa.mts.repository.CourierDAOImp;
+import com.cg.datajpa.mts.repository.OfficeOutletDaoImpl;
 import com.cg.datajpa.mts.repository.StaffMemberDAOImp;
 import com.cg.datajpa.mts.service.ManagerServiceImpl;
 
@@ -35,7 +40,42 @@ class ManagerServiceImplTest {
 	CourierDAOImp courierDao;
 	@MockBean
 	ComplaintDaoImpl complaintDao;
-
+	@MockBean
+	OfficeOutletDaoImpl officeDao;
+	//@MockBean
+	//StaffMemberDAOImp staffDao;
+	
+	@Test
+	public void testAddStaffMember() throws OutletNotFoundException
+	{
+		OfficeStaffMember os=new OfficeStaffMember();
+		CourierOfficeOutlet office=new CourierOfficeOutlet();
+		office.setStaffmembers(new ArrayList<>());
+		when(officeDao.getOfficeInfo(1)).thenReturn(office);
+		when(officeDao.updateOffice(office)).thenReturn(true);
+		assertEquals(true,managerservice.addStaffMember(os,1));
+	}
+	
+	@Test
+	public void testAddStaffMemberExcetption() throws OutletNotFoundException{
+		
+	}/*
+	@Test
+	public void testRemoveStaffMember() throws StaffMemberNotFoundException {
+		OfficeStaffMember os=new OfficeStaffMember();
+		when(staffDao.removeStaffMember(os)).thenReturn(true);
+		assertEquals(true,managerservice.removeStaffMember(os));
+	}
+	
+	@Test
+	public void testGetStaffMember()  throws StaffMemberNotFoundException
+	{
+		OfficeStaffMember os=new OfficeStaffMember();
+		when(staffDao.getStaffMember(1)).thenReturn(os);
+		assertEquals(os,managerservice.getStaffMember(1));	
+	}
+	*/
+	
 	@Test
 	public void testGetCourierStatus() throws CourierNotFoundException {
 		Courier c = new Courier();
@@ -72,5 +112,5 @@ class ManagerServiceImplTest {
 		when(courierDao.getAllDeliveredCouriers()).thenReturn(list);
 		assertEquals(3, managerservice.getAllDeliveredCouriers().size());
 	}
-
+	
 }

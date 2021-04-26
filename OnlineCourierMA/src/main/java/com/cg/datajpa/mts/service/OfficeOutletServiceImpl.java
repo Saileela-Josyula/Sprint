@@ -17,22 +17,20 @@ public class OfficeOutletServiceImpl implements IOfficeOutletService {
 	
 	@Autowired
 	OfficeOutletDaoImpl dao;
-	public void setOfficeOutletDAO(OfficeOutletDaoImpl officeDAO) {
-		this.dao=officeDAO;
+	public OfficeOutletServiceImpl() {
+		this.dao=new OfficeOutletDaoImpl();
 	}
 	
-	
-	
 	@Override
-	public void addNewOffice(CourierOfficeOutlet officeoutlet) {
+	public boolean addNewOffice(CourierOfficeOutlet officeoutlet) {
 		// TODO Auto-generated method stub
-		dao.addNewOffice(officeoutlet);
+		return dao.addNewOffice(officeoutlet);
 	}
 
 	@Override
-	public void removeNewOffice(CourierOfficeOutlet officeoutlet) {
+	public boolean removeNewOffice(CourierOfficeOutlet officeoutlet) {
 		// TODO Auto-generated method stub
-		dao.removeNewOffice(officeoutlet);
+		return dao.removeNewOffice(officeoutlet);
 	}
 
 	@Override

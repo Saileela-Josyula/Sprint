@@ -32,7 +32,6 @@ public class ShipmentServiceImplTest {
 		courier.setCourierid(100);
 		when(courdao.updateCourierInfoSet(100, CourierStatus.intransit)).thenReturn(true);
 		assertEquals(true, shipment.initiateShipmentTransaction(100));
-		
 	}
 
 	@Test

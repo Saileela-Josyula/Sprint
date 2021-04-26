@@ -27,51 +27,43 @@ import com.cg.datajpa.mts.repository.CourierDAOImp;
 public class ManagerServiceImpl implements IManagerService {
 	@Autowired
 	StaffMemberDAOImp staffMemberDao;
-
-	public void setStaffMemberDAOImpl(StaffMemberDAOImp staffDAO) {
-		this.staffMemberDao = staffDAO;
-	}
-
+	
 	@Autowired
 	CourierDAOImp couerirDao;
-
-	public void setCourierDAOImp(CourierDAOImp courierDAO) {
-		this.couerirDao = courierDAO;
-	}
 
 	@Autowired
 	ComplaintDaoImpl complaintDao;
 
-	public void setComplaintDAOImp(ComplaintDaoImpl complaintDAO) {
-		this.complaintDao = complaintDAO;
-	}
-
 	@Autowired
 	OfficeOutletDaoImpl officeDao;
-
-	public void setOfficeDao(OfficeOutletDaoImpl officeDao) {
-		this.officeDao = officeDao;
+	
+	public ManagerServiceImpl() {
+		this.staffMemberDao=new StaffMemberDAOImp();
+		this.couerirDao=new CourierDAOImp();
+		this.complaintDao=new ComplaintDaoImpl();
+		this.officeDao=new OfficeOutletDaoImpl();
 	}
 
 	@Override
-	public void addStaffMember(OfficeStaffMember staffmember, int officeid) throws OutletNotFoundException {
-		// TODO Auto-generated method stub
+	public boolean addStaffMember(OfficeStaffMember staffmember, int officeid) throws OutletNotFoundException {
+		
 		CourierOfficeOutlet office = null;
 		office = officeDao.getOfficeInfo(officeid);
 		if (office != null) {
 			List<OfficeStaffMember> members = office.getStaffmembers();
 			members.add(staffmember);
-			officeDao.updateOffice(office);
+			return officeDao.updateOffice(office);
 		} else {
 			throw new OutletNotFoundException("Office not found");
 		}
+		
 
 	}
 
 	@Override
-	public void removeStaffMember(OfficeStaffMember staffmember) {
+	public boolean removeStaffMember(OfficeStaffMember staffmember) {
 		// TODO Auto-generated method stub
-		staffMemberDao.removeStaffMember(staffmember);
+		return staffMemberDao.removeStaffMember(staffmember);
 	}
 
 	@Override

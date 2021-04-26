@@ -14,8 +14,8 @@ import com.cg.datajpa.mts.exception.StaffMemberNotFoundException;
 
 public interface IManagerService {
 
-	public void addStaffMember(OfficeStaffMember staffmember,int officeid)throws OutletNotFoundException;
-	public void removeStaffMember(OfficeStaffMember staffmember);
+	public boolean addStaffMember(OfficeStaffMember staffmember,int officeid)throws OutletNotFoundException;
+	public boolean removeStaffMember(OfficeStaffMember staffmember);
 	
 	public OfficeStaffMember getStaffMember(int empid) throws StaffMemberNotFoundException;
 	public List<OfficeStaffMember> getAllStaffMembers(CourierOfficeOutlet officeoutlet);

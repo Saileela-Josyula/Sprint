@@ -7,8 +7,8 @@ import com.cg.datajpa.mts.exception.OutletNotFoundException;
 
 public interface IOfficeOutletDao {
 
-	public void addNewOffice(CourierOfficeOutlet officeoutlet);
-	public void removeNewOffice(CourierOfficeOutlet officeoutlet);
+	public boolean addNewOffice(CourierOfficeOutlet officeoutlet);
+	public boolean removeNewOffice(CourierOfficeOutlet officeoutlet);
 	public CourierOfficeOutlet getOfficeInfo(int officeid) throws OutletNotFoundException;
 	public List<CourierOfficeOutlet> getAllOfficesData();
 }

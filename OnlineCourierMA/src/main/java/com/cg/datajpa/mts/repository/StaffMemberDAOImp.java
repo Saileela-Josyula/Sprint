@@ -22,19 +22,34 @@ public class StaffMemberDAOImp implements IStaffMemberDao {
 		em=JpaUtils.getEntityManager();
 	}
 	@Override
-	public void addStaffMember(OfficeStaffMember staffmember) 
+	public boolean addStaffMember(OfficeStaffMember staffmember) 
 	{
        //em.getTransaction().begin();
-       em.persist(staffmember);
+		try {
+			 em.persist(staffmember);
+			 return true;
+		}
+		catch(Exception ex) {
+			
+		}
+		return false;
        //em.getTransaction().commit();
 	}
 
 	@Override
-	public void removeStaffMember(OfficeStaffMember staffmember)
+	public boolean removeStaffMember(OfficeStaffMember staffmember)
 	{
 		//em.getTransaction().begin();
 		//OfficeStaffMember o=em.merge(staffmember);
-		em.remove(staffmember);
+		try {
+			em.remove(staffmember);
+			return true;
+		}
+		catch(Exception ex) {
+			
+		}
+		return false;
+		
 		//em.getTransaction().commit();
 	}
 

@@ -20,22 +20,44 @@ public class OfficeOutletDaoImpl implements IOfficeOutletDao {
 	}
 	
 	@Override
-	public void addNewOffice(CourierOfficeOutlet officeoutlet) {
+	public boolean addNewOffice(CourierOfficeOutlet officeoutlet) {
 		//em.getTransaction().begin();
-		em.persist(officeoutlet);
+		try {
+			em.persist(officeoutlet);
+			return true;
+		}
+		catch(Exception ex) {
+			
+		}
+		return false;
 		//em.getTransaction().commit();
 	}
 
 	@Override
-	public void removeNewOffice(CourierOfficeOutlet officeoutlet) {
+	public boolean removeNewOffice(CourierOfficeOutlet officeoutlet) {
 		//.getTransaction().begin();
-		CourierOfficeOutlet managed=em.merge(officeoutlet);
-		em.remove(managed);
+		try {
+			CourierOfficeOutlet managed=em.merge(officeoutlet);
+			em.remove(managed);
+			return true;
+		}
+		catch(Exception ex) {
+			
+		}
+		return false;
 		//em.getTransaction().commit();
 	}
 	
-	public void updateOffice(CourierOfficeOutlet officeoutlet) {
-		em.merge(officeoutlet);
+	public boolean updateOffice(CourierOfficeOutlet officeoutlet) {
+		try {
+			em.merge(officeoutlet);
+			return true;
+		}
+		catch(Exception ex) {
+			
+		}
+		return false;
+		
 	}
 
 	@Override

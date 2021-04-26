@@ -6,14 +6,16 @@ import org.springframework.stereotype.Service;
 public class PaymentsServiceImp implements IPaymentService {
 
 	@Override
-	public void processPaymentByCash() {
+	public String processPaymentByCash() {
 		System.out.println("Payment by cash method generated");
+		return "Payment by cash method generated";
 
 	}
 
 	@Override
-	public void processPaymentByCard() {
+	public String processPaymentByCard() {
 		System.out.println("Payment by card method generated");
+		return "Payment by card method generated";
 
 	}
 
