@@ -22,41 +22,50 @@ import com.cg.datajpa.mts.repository.OfficeOutletDaoImpl;
 import com.cg.datajpa.mts.repository.StaffMemberDAOImp;
 import com.cg.datajpa.mts.repository.ComplaintDaoImpl;
 import com.cg.datajpa.mts.repository.CourierDAOImp;
+
 @Service
 public class ManagerServiceImpl implements IManagerService {
 	@Autowired
 	StaffMemberDAOImp dao;
+
 	public void setStaffMemberDAOImpl(StaffMemberDAOImp staffDAO) {
-		this.dao=staffDAO;
+		this.dao = staffDAO;
 	}
-	
+
 	@Autowired
 	CourierDAOImp da;
+
 	public void setCourierDAOImp(CourierDAOImp courierDAO) {
-		this.da=courierDAO;
+		this.da = courierDAO;
 	}
-	
+
 	@Autowired
 	ComplaintDaoImpl d;
+
 	public void setComplaintDAOImp(ComplaintDaoImpl complaintDAO) {
-		this.d=complaintDAO;
+		this.d = complaintDAO;
 	}
-	
+
 	@Autowired
 	OfficeOutletDaoImpl officeDao;
+
 	public void setOfficeDao(OfficeOutletDaoImpl officeDao) {
 		this.officeDao = officeDao;
 	}
 
 	@Override
-	public void addStaffMember(OfficeStaffMember staffmember,int officeid) throws OutletNotFoundException{
+	public void addStaffMember(OfficeStaffMember staffmember, int officeid) throws OutletNotFoundException {
 		// TODO Auto-generated method stub
-	
-			CourierOfficeOutlet office= officeDao.getOfficeInfo(officeid);
-			List<OfficeStaffMember> members=office.getStaffmembers();
+		CourierOfficeOutlet office = null;
+		office = officeDao.getOfficeInfo(officeid);
+		if (office != null) {
+			List<OfficeStaffMember> members = office.getStaffmembers();
 			members.add(staffmember);
 			officeDao.updateOffice(office);
-	
+		} else {
+			throw new OutletNotFoundException("Office not found");
+		}
+
 	}
 
 	@Override
@@ -68,50 +77,50 @@ public class ManagerServiceImpl implements IManagerService {
 	@Override
 	public OfficeStaffMember getStaffMember(int empid) throws StaffMemberNotFoundException {
 		// TODO Auto-generated method stub
-		OfficeStaffMember member=null;
+		OfficeStaffMember member = null;
 		try {
-			member=dao.getStaffMember(empid);
+			member = dao.getStaffMember(empid);
+		} catch (StaffMemberNotFoundException ex) {
+
 		}
-		catch(StaffMemberNotFoundException ex) {
-			
-		}
-		return member;
+		if (member != null) {
+			return member;
+		} else
+			throw new StaffMemberNotFoundException("Staff not found");
+
 	}
 
 	@Override
 	public List<OfficeStaffMember> getAllStaffMembers(CourierOfficeOutlet officeoutlet) {
 		// TODO Auto-generated method stub
-		List<OfficeStaffMember> data=new ArrayList<>();
-		data=dao.getAllStaffMembers(officeoutlet);
+		List<OfficeStaffMember> data = new ArrayList<>();
+		data = dao.getAllStaffMembers(officeoutlet);
 		return data;
 	}
 
 	@Override
 	public CourierStatus getCourierStatus(Courier courier) throws CourierNotFoundException {
 		// TODO Auto-generated method stub
-		CourierStatus member=null;
-		Courier updatedcourier= null;
-		
-			updatedcourier=da.getCourierInfo(courier.getCourierid());
-		
-		if(updatedcourier==null) {
+		Courier updatedcourier = null;
+
+		updatedcourier = da.getCourierInfo(courier.getCourierid());
+
+		if (updatedcourier == null) {
 			throw new CourierNotFoundException("Courier not found");
-		}
-		else {
+		} else {
 			return updatedcourier.getStatus();
 		}
-		
+
 	}
 
 	@Override
 	public Complaint getRegistedComplaint(int complaintid) throws ComplaintNotFoundException {
 		// TODO Auto-generated method stub
-		Complaint member=null;
+		Complaint member = null;
 		try {
-			member=d.getComplaint(complaintid);
-		}
-		catch(ComplaintNotFoundException ex) {
-			
+			member = d.getComplaint(complaintid);
+		} catch (ComplaintNotFoundException ex) {
+
 		}
 		return member;
 	}
@@ -119,13 +128,14 @@ public class ManagerServiceImpl implements IManagerService {
 	@Override
 	public List<Complaint> getAllComplaints() {
 		// TODO Auto-generated method stub
-		List<Complaint> data=new ArrayList<>();
-		data=d.getAllComplaints();
+		List<Complaint> data = new ArrayList<>();
+		data = d.getAllComplaints();
 		return data;
 	}
-	public List<Courier> getAllDeliveredCouriers(){
-		List<Courier> couriers=new ArrayList<>();
-		couriers=da.getAllDeliveredCouriers();
+
+	public List<Courier> getAllDeliveredCouriers() {
+		List<Courier> couriers = new ArrayList<>();
+		couriers = da.getAllDeliveredCouriers();
 		return couriers;
 	}
 }

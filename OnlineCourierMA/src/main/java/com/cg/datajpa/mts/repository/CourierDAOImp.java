@@ -57,7 +57,7 @@ public class CourierDAOImp implements ICourierDao {
 	@Override
 	public List<Courier> getAllDeliveredCouriers()
 	{
-		List<Courier> cour = eManager.createQuery("Select t from Courier t where t.status=2").getResultList();
+		List<Courier> cour = eManager.createQuery("Select t from Courier t where t.status=2",Courier.class).getResultList();
 		return cour;
 	}
 	@Override

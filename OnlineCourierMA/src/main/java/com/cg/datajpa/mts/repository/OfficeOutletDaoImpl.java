@@ -49,7 +49,7 @@ public class OfficeOutletDaoImpl implements IOfficeOutletDao {
 
 	@Override
 	public List<CourierOfficeOutlet> getAllOfficesData() {
-		List<CourierOfficeOutlet> outlets = em.createQuery("Select t from CourierOfficeOutlet t").getResultList();
+		List<CourierOfficeOutlet> outlets = em.createQuery("Select t from CourierOfficeOutlet t",CourierOfficeOutlet.class).getResultList();
 		return outlets;
 	}
 
