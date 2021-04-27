@@ -27,10 +27,10 @@ public class ShipmentServiceImplTest {
 	@Autowired
 	ShipmentServiceImp shipment;
 	@Test
-	public void testInitiateShipmentProcess() {
+	public void testInitiateShipmentProcess() throws CourierNotFoundException {
 		Courier courier = new Courier();
 		courier.setCourierid(100);
-		when(courdao.updateCourierInfoSet(100, CourierStatus.intransit)).thenReturn(true);
+		when(courdao.updateCourierInfo(100, CourierStatus.intransit)).thenReturn(true);
 		assertEquals(true, shipment.initiateShipmentTransaction(100));
 	}
 
@@ -51,19 +51,19 @@ public class ShipmentServiceImplTest {
 	}
 
 	@Test
-	public void testCloseShipmentTransaction() {
+	public void testCloseShipmentTransaction() throws CourierNotFoundException{
 		Courier courier = new Courier();
 		courier.setCourierid(100);
-		when(courdao.updateCourierInfoSet(100, CourierStatus.delivered)).thenReturn(true);
+		when(courdao.updateCourierInfo(100, CourierStatus.delivered)).thenReturn(true);
 		assertEquals(true, shipment.closeShipmentTransaction(100));
 		
 	}
 
 	@Test
-	public void testRejectShipmentProcess() {
+	public void testRejectShipmentProcess() throws CourierNotFoundException{
 		Courier courier = new Courier();
 		courier.setCourierid(100);
-		when(courdao.updateCourierInfoSet(100, CourierStatus.rejected)).thenReturn(true);
+		when(courdao.updateCourierInfo(100, CourierStatus.rejected)).thenReturn(true);
 		assertEquals(true, shipment.rejectShipmentTransaction(100));
 		
 	}

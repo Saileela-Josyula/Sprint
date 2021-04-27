@@ -83,9 +83,12 @@ public class CustomerController {
 	 */
 	@Transactional
 	@PostMapping(value = "/complaint", consumes = "application/json")
-	public ResponseEntity<HttpStatus> registerComplaint(@RequestBody Complaint complaint) {
-		custService.registerComplaint(complaint);
-		return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<String> registerComplaint(@RequestBody Complaint complaint) {
+		boolean status=custService.registerComplaint(complaint);
+		if(status)
+		       return new ResponseEntity<>("Complaint is added Successfully!!!",HttpStatus.OK);
+		else
+			return new ResponseEntity<>("There was an error, please try again",HttpStatus.NOT_ACCEPTABLE);
 	}
 
 	/*

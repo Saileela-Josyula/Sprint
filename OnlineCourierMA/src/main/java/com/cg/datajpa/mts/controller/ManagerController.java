@@ -94,7 +94,7 @@ public class ManagerController {
 	 */
 	@Transactional
 	@DeleteMapping(value = "/deletestaff/{empid}")
-	public ResponseEntity<HttpStatus> deleteOfficeStaff(@PathVariable("empid") int empid) {
+	public ResponseEntity<String> deleteOfficeStaff(@PathVariable("empid") int empid) {
 		OfficeStaffMember member = null;
 		try {
 			member = staffDAO.getStaffMember(empid);
@@ -102,9 +102,9 @@ public class ManagerController {
 		}
 		if (member != null) {
 			managerService.removeStaffMember(member);
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>("Office Member deleted Successfully!!!", HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("There was an error, please try again ", HttpStatus.NOT_FOUND);
 		}
 	}
 

@@ -42,52 +42,31 @@ class ManagerServiceImplTest {
 	ComplaintDaoImpl complaintDao;
 	@MockBean
 	OfficeOutletDaoImpl officeDao;
-	//@MockBean
-	//StaffMemberDAOImp staffDao;
-	
+
 	@Test
-	public void testAddStaffMember() throws OutletNotFoundException
-	{
-		OfficeStaffMember os=new OfficeStaffMember();
-		CourierOfficeOutlet office=new CourierOfficeOutlet();
+	void testAddStaffMember() throws OutletNotFoundException {
+		OfficeStaffMember os = new OfficeStaffMember();
+		CourierOfficeOutlet office = new CourierOfficeOutlet();
 		office.setStaffmembers(new ArrayList<>());
 		when(officeDao.getOfficeInfo(1)).thenReturn(office);
 		when(officeDao.updateOffice(office)).thenReturn(true);
-		assertEquals(true,managerservice.addStaffMember(os,1));
+		assertEquals(true, managerservice.addStaffMember(os, 1));
 	}
+
 	
+
 	@Test
-	public void testAddStaffMemberExcetption() throws OutletNotFoundException{
-		
-	}/*
-	@Test
-	public void testRemoveStaffMember() throws StaffMemberNotFoundException {
-		OfficeStaffMember os=new OfficeStaffMember();
-		when(staffDao.removeStaffMember(os)).thenReturn(true);
-		assertEquals(true,managerservice.removeStaffMember(os));
-	}
-	
-	@Test
-	public void testGetStaffMember()  throws StaffMemberNotFoundException
-	{
-		OfficeStaffMember os=new OfficeStaffMember();
-		when(staffDao.getStaffMember(1)).thenReturn(os);
-		assertEquals(os,managerservice.getStaffMember(1));	
-	}
-	*/
-	
-	@Test
-	public void testGetCourierStatus() throws CourierNotFoundException {
+	void testGetCourierStatus() throws CourierNotFoundException {
 		Courier c = new Courier();
 		c.setCourierid(1);
 		c.setStatus(CourierStatus.iniated);
 		when(courierDao.getCourierInfo(1)).thenReturn(c);
 		assertEquals(CourierStatus.iniated, managerservice.getCourierStatus(c));
-		
+
 	}
 
 	@Test
-	public void testGetRegisteredComplaint() throws ComplaintNotFoundException {
+	void testGetRegisteredComplaint() throws ComplaintNotFoundException {
 		Complaint comp = new Complaint();
 		comp = complaintDao.getComplaint(3);
 		when(comp).thenReturn(comp);
@@ -95,7 +74,7 @@ class ManagerServiceImplTest {
 	}
 
 	@Test
-	public void testGetAllComplaints() {
+	void testGetAllComplaints() {
 		List<Complaint> list = new ArrayList<>();
 		list.add(new Complaint());
 		list.add(new Complaint());
@@ -104,7 +83,7 @@ class ManagerServiceImplTest {
 	}
 
 	@Test
-	public void testGetALLDeliveredCouriers() {
+	void testGetALLDeliveredCouriers() {
 		List<Courier> list = new ArrayList<>();
 		list.add(new Courier());
 		list.add(new Courier());
@@ -112,5 +91,5 @@ class ManagerServiceImplTest {
 		when(courierDao.getAllDeliveredCouriers()).thenReturn(list);
 		assertEquals(3, managerservice.getAllDeliveredCouriers().size());
 	}
-	
+
 }

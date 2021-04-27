@@ -4,18 +4,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class JpaUtils
-{
-	private static EntityManagerFactory emf=null;
-	private static EntityManager em=null;
-	static
-	{
-		emf=Persistence.createEntityManagerFactory("JPA-PU");
+public class JpaUtils {
+	private static EntityManagerFactory entitymanagerfactory = null;
+	private static EntityManager entitymanager = null;
+	static {
+		entitymanagerfactory = Persistence.createEntityManagerFactory("JPA-PU");
 	}
-	public static EntityManager getEntityManager()
-	{
-		if(em==null || em.isOpen())
-			em=emf.createEntityManager();
-		return em;		
+
+	public static EntityManager getEntityManager() {
+		if (entitymanager == null || entitymanager.isOpen())
+			entitymanager = entitymanagerfactory.createEntityManager();
+		return entitymanager;
 	}
 }

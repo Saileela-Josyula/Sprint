@@ -43,9 +43,17 @@ public class ShipmentController {
 	 */
 	@Transactional
 	@PutMapping(value = "/initiate", consumes = "application/json")
-	public ResponseEntity<HttpStatus> initiateShipmentTransaction(@RequestBody int courierid) {
-		shipmentService.initiateShipmentTransaction(courierid);
-		return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<String> initiateShipmentTransaction(@RequestBody int courierid) {
+		Courier courier=null;
+		try {
+			courier = courierDao.getCourierInfo(courierid);
+		}
+		catch(CourierNotFoundException e) {}
+		if(courier!=null) {
+			shipmentService.initiateShipmentTransaction(courierid);
+			 return new ResponseEntity<>("Shipment is initiated!!!",HttpStatus.OK);
+		}else
+			return new ResponseEntity<>("There was an error, please try again",HttpStatus.NOT_ACCEPTABLE);
 	}
 	/*
 	 * Method:checkShipmentStatus check status of a courier using courier id
@@ -76,9 +84,17 @@ public class ShipmentController {
 	 */
 	@Transactional
 	@PutMapping(value = "/close", consumes = "application/json")
-	public ResponseEntity<HttpStatus> closeShipmentTransaction(@RequestBody int courierid) {
-		shipmentService.closeShipmentTransaction(courierid);
-		return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<String	> closeShipmentTransaction(@RequestBody int courierid) {
+		Courier courier=null;
+		try {
+			courier = courierDao.getCourierInfo(courierid);
+		}
+		catch(CourierNotFoundException e) {}
+		if(courier!=null) {
+			shipmentService.closeShipmentTransaction(courierid);
+			 return new ResponseEntity<>("Shipment is Closed Successfully!!!",HttpStatus.OK);
+		}else
+			return new ResponseEntity<>("There was an error, please try again",HttpStatus.NOT_ACCEPTABLE);
 	}
 	/*
 	 * Method:rejectShipmentTransaction update status of a courier using courier id
@@ -89,8 +105,16 @@ public class ShipmentController {
 	 */
 	@Transactional
 	@PutMapping(value = "/reject", consumes = "application/json")
-	public ResponseEntity<HttpStatus> rejectShipmentTransaction(@RequestBody int courierid) {
-		shipmentService.rejectShipmentTransaction(courierid);
-		return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<String> rejectShipmentTransaction(@RequestBody int courierid) {
+		Courier courier=null;
+		try {
+			courier = courierDao.getCourierInfo(courierid);
+		}
+		catch(CourierNotFoundException e) {}
+		if(courier!=null) {
+			shipmentService.rejectShipmentTransaction(courierid);
+			  return new ResponseEntity<>("Shipment is Rejected Successfully!!1",HttpStatus.OK);
+		}else
+			return new ResponseEntity<>("There was an error, please try again",HttpStatus.NOT_ACCEPTABLE); 
 	}
 }

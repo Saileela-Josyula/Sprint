@@ -38,9 +38,12 @@ public class OfficeController {
 	 */
 	@Transactional
 	@PostMapping(value = "/addoffice", consumes = "application/json")
-	public ResponseEntity<HttpStatus> addOffice(@RequestBody CourierOfficeOutlet courierOffice) {
-		officeservice.addNewOffice(courierOffice);
-		return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<String> addOffice(@RequestBody CourierOfficeOutlet courierOffice) {
+		boolean status=officeservice.addNewOffice(courierOffice);
+		if(status)
+		        return new ResponseEntity<>("Office is added Successfully!!!",HttpStatus.OK);
+		else
+			 return new ResponseEntity<>("There was an error, please try again",HttpStatus.NOT_ACCEPTABLE);
 	}
 
 	/*
@@ -52,7 +55,7 @@ public class OfficeController {
 	 */
 	@Transactional
 	@DeleteMapping(value = "/delete")
-	public ResponseEntity<HttpStatus> deleteOffice(@RequestBody int officeid) {
+	public ResponseEntity<String> deleteOffice(@RequestBody int officeid) {
 		CourierOfficeOutlet office = null;
 		try {
 			office = officeservice.getOfficeInfo(officeid);
@@ -60,9 +63,9 @@ public class OfficeController {
 		}
 		if (office != null) {
 			officeservice.removeNewOffice(office);
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>("Office is Deleted Successfully!!!",HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>("There was an error, please try again",HttpStatus.NO_CONTENT);
 		}
 	}
 

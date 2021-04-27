@@ -17,21 +17,26 @@ import com.cg.datajpa.mts.repository.CourierDAOImp;
 public class CustomerServiceImp implements ICustomerService {
 
 	@Autowired
-	CourierDAOImp c;
+	CourierDAOImp courierDao;
 
 	@Autowired
-	ComplaintDaoImpl cdao;
+	ComplaintDaoImpl complaintDao;
 
 	@Autowired
 	PaymentsServiceImp paymentService;
 
 	public CustomerServiceImp() {
 		super();
-		c = new CourierDAOImp();
-		cdao = new ComplaintDaoImpl();
+		courierDao = new CourierDAOImp();
+		complaintDao = new ComplaintDaoImpl();
 		paymentService = new PaymentsServiceImp();
 	}
-
+	/*
+	 * Method:initiateProcess Add courier to database and set courier status as
+	 * 							initiated,also set consignment no,initiated date and delivery date
+	 * 
+	 * CreatedBy:Pawan Kumar BM CreatedDate:22 April 2021
+	 */
 	@Override
 	public boolean initiateProcess(Courier courier) {
 		courier.setStatus(CourierStatus.iniated);
@@ -39,9 +44,13 @@ public class CustomerServiceImp implements ICustomerService {
 		courier.setConsignmentno(random.nextInt(1000) + 1000);
 		courier.setInitiatedDate(LocalDate.now());
 		courier.setDeliveredDate(LocalDate.now().plusDays(7));
-		return c.addCourierInfo(courier);
+		return courierDao.addCourierInfo(courier);
 	}
-
+	/*
+	 * Method:makePayment Process payment by cash|card
+	 * 
+	 * CreatedBy:Ede Chandini CreatedDate:22 April 2021
+	 */
 	@Override
 	public String makePayment(String method) {
 		if (method.equals("cash")) {
@@ -51,27 +60,30 @@ public class CustomerServiceImp implements ICustomerService {
 			paymentService.processPaymentByCard();
 			return "Payment done by card";
 		}
-
 	}
-
+	/*
+	 * Method:checkOnlineTrackingStatus Check status of courier using courier id
+	 * 
+	 * CreatedBy:Pawan Kumar BM CreatedDate:22 April 2021
+	 */
 	@Override
 	public CourierStatus checkOnlineTrackingStatus(int courierid) throws CourierNotFoundException {
-		// TODO Auto-generated method stub
-		CourierStatus st = null;
-		Courier courier = c.getCourierInfo(courierid);
-
+		CourierStatus status = null;
+		Courier courier = courierDao.getCourierInfo(courierid);
 		if (courier != null) {
-			st = courier.getStatus();
-			return st;
+			status = courier.getStatus();
+			return status;
 		} else {
 			throw new CourierNotFoundException("Courier not found");
 		}
-
 	}
-
+	/*
+	 * Method:registerComplaint Register new complaint by user
+	 * 
+	 * CreatedBy:Pawan Kumar BM CreatedDate:22 April 2021
+	 */
 	@Override
 	public boolean registerComplaint(Complaint complaint) {
-		// TODO Auto-generated method stub
-		return cdao.addNewComplaint(complaint);
+		return complaintDao.addNewComplaint(complaint);
 	}
 }

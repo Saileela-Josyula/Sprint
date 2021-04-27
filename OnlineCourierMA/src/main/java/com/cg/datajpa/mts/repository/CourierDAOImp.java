@@ -1,88 +1,78 @@
 package com.cg.datajpa.mts.repository;
+
 import java.time.LocalDate;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.cg.datajpa.mts.entities.Courier;
 import com.cg.datajpa.mts.entities.CourierStatus;
 import com.cg.datajpa.mts.exception.CourierNotFoundException;
 
-
 @Repository
 public class CourierDAOImp implements ICourierDao {
-	
+
 	@Autowired
 	EntityManager eManager;
+
 	public CourierDAOImp() {
-		eManager=JpaUtils.getEntityManager();
+		eManager = JpaUtils.getEntityManager();
 	}
+
 	@Override
-	public boolean addCourierInfo(Courier courier)
-	{
-		//eManager.getTransaction().begin();
+	public boolean addCourierInfo(Courier courier) {
 		try {
 			eManager.persist(courier);
 			return true;
-		}
-		catch(Exception ex) {
-			
+		} catch (Exception ex) {
+
 		}
 		return false;
-		//eManager.getTransaction().commit();
 	}
+
 	@Override
-	public Courier getCourierInfo(int courierid) throws CourierNotFoundException
-	{	
-		Courier courier=null;
-		courier= eManager.find(Courier.class, courierid);
-		if(courier!=null)
+	public Courier getCourierInfo(int courierid) throws CourierNotFoundException {
+		Courier courier = null;
+		courier = eManager.find(Courier.class, courierid);
+		if (courier != null)
 			return courier;
 		else
 			throw new CourierNotFoundException("Courier not found");
 	}
+
 	@Override
-	public void removeCourierInfo(int courierid)
-	{
-		//eManager.getTransaction().begin();
+	public void removeCourierInfo(int courierid) {
 		eManager.remove(eManager.find(Courier.class, courierid));
-		//eManager.getTransaction().commit();
 	}
-	
+
 	@Override
-	public List<Courier> getAllDeliveredCouriers()
-	{
-		List<Courier> cour = eManager.createQuery("Select t from Courier t where t.status=2",Courier.class).getResultList();
-		return cour;
+	public List<Courier> getAllDeliveredCouriers() {
+		return eManager.createQuery("Select t from Courier t where t.status=2", Courier.class).getResultList();
 	}
+
 	@Override
-	public List<Courier> getAllDeliveredCouriersByDate(LocalDate date)
-	{	TypedQuery<Courier> qry=eManager.createQuery("Select t from Courier t where t.deliveredDate<=?1",Courier.class);
+	public List<Courier> getAllDeliveredCouriersByDate(LocalDate date) {
+		TypedQuery<Courier> qry = eManager.createQuery("Select t from Courier t where t.deliveredDate<=?1",
+				Courier.class);
 		qry.setParameter(1, date);
-		List<Courier> c=qry.getResultList();
-		return c;
+		return qry.getResultList();
 	}
+
 	@Override
-	public boolean updateCourierInfoSet(int courierid,CourierStatus s) {
-		//eManager.getTransaction().begin();
-		Query qry= eManager.createQuery("update Courier c set c.status=?2 where c.courierid=?1");
-		qry.setParameter(1, courierid);
-		qry.setParameter(2, s);
-		try {
-			qry.executeUpdate();
-			return true;
+	public boolean updateCourierInfo(int courierid, CourierStatus status) throws CourierNotFoundException {
+		Courier courier = null;
+		courier = eManager.find(Courier.class, courierid);
+		if(courier!=null) {
+		Query qry = eManager.createQuery("update Courier c set c.status=?1 where c.courierId=?2");
+		qry.setParameter(2, courierid);
+		qry.setParameter(1, status);
+		qry.executeUpdate();
+		return true;
 		}
-		catch(Exception ex) {
-			
-		}
-		return false;
-		//eManager.getTransaction().commit();
-		
+		else
+			throw new CourierNotFoundException("Courier not found");
+
 	}
-	}
-	
+}
