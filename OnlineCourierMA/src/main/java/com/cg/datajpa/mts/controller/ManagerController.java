@@ -111,7 +111,7 @@ public class ManagerController {
 	/*
 	 * Method:getCourierStatus check status of any courier using courier id
 	 * 
-	 * @GetMapping CreatedBy:Venkatesh Murty CreatedDate:23 April 2021
+	 * @GetMapping CreatedBy:Pankaj Kumar Singh CreatedDate:23 April 2021
 	 */
 	@GetMapping(value = "/courier/{courierid}", produces = "application/json")
 	public ResponseEntity<Optional<CourierStatus>> getCourierStatus(@PathVariable("courierid") int courierid) {
@@ -130,7 +130,7 @@ public class ManagerController {
 	/*
 	 * Method:getAllComplaint show all complaints in database
 	 * 
-	 * @GetMapping CreatedBy:Venkatesh Murty CreatedDate:23 April 2021
+	 * @GetMapping CreatedBy:Pankaj Kumar Singh CreatedDate:23 April 2021
 	 */
 	@GetMapping(value = "/complaint/all", produces = "application/json")
 	public ResponseEntity<List<Complaint>> getAllComplaint() {
@@ -140,7 +140,7 @@ public class ManagerController {
 	/*
 	 * Method:getAllDeliveredCourier fetch all couriers which are delivered
 	 * 
-	 * @GetMapping CreatedBy:Venkatesh Murty CreatedDate:23 April 2021
+	 * @GetMapping CreatedBy:Pankaj Kumar Singh CreatedDate:23 April 2021
 	 */
 	@GetMapping(value = "/courier/alldelivered", produces = "application/json")
 	public ResponseEntity<List<Courier>> getAllDeliveredCourier() {

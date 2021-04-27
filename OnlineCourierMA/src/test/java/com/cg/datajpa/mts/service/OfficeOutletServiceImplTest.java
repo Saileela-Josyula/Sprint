@@ -69,13 +69,13 @@ public class OfficeOutletServiceImplTest
 	public void testIsOfficeOpen() throws OutletClosedException
 	{
 		CourierOfficeOutlet office=new CourierOfficeOutlet(null,LocalTime.now().parse("09:00:00"),LocalTime.now().parse("19:00:00"),null);
-		assertEquals(false, officeService.isOfficeOpen(office));
+		assertEquals(true, officeService.isOfficeOpen(office));
 	}
 	@Test
 	public void testIsOfficeClosed() throws OutletClosedException 
 	{
 		CourierOfficeOutlet office=new CourierOfficeOutlet(null,LocalTime.now().parse("09:00:00"),LocalTime.now().parse("19:00:00"),null);
-		assertEquals(true, officeService.isOfficeClosed(office));
+		assertEquals(false, officeService.isOfficeClosed(office));
 	}
 
 }

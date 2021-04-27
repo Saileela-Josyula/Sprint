@@ -65,7 +65,7 @@ public class CourierDAOImp implements ICourierDao {
 		Courier courier = null;
 		courier = eManager.find(Courier.class, courierid);
 		if(courier!=null) {
-		Query qry = eManager.createQuery("update Courier c set c.status=?1 where c.courierId=?2");
+		Query qry = eManager.createQuery("update Courier c set c.status=?1 where c.courierid=?2");
 		qry.setParameter(2, courierid);
 		qry.setParameter(1, status);
 		qry.executeUpdate();

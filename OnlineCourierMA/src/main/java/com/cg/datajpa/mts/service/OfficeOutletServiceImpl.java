@@ -22,7 +22,7 @@ public class OfficeOutletServiceImpl implements IOfficeOutletService {
 	/*
 	 * Method:addNewOffice add office to database
 	 * 
-	 * CreatedBy:Pankaj Kumar Singh CreatedDate:22 April 2021
+	 * CreatedBy:Venkatesh Murty CreatedDate:22 April 2021
 	 */
 	@Override
 	public boolean addNewOffice(CourierOfficeOutlet officeoutlet) {
@@ -32,7 +32,7 @@ public class OfficeOutletServiceImpl implements IOfficeOutletService {
 	/*
 	 * Method:removeNewOffice delete office and related data to it
 	 * 
-	 * CreatedBy:Pankaj Kumar Singh CreatedDate:22 April 2021
+	 * CreatedBy:Venkatesh Murty CreatedDate:22 April 2021
 	 */
 	@Override
 	public boolean removeNewOffice(CourierOfficeOutlet officeoutlet) {
@@ -44,7 +44,7 @@ public class OfficeOutletServiceImpl implements IOfficeOutletService {
 	 * 
 	 *
 	 * 
-	 * CreatedBy:Pankaj Kumar Singh CreatedDate:22 April 2021
+	 * CreatedBy:Venkatesh Murty CreatedDate:22 April 2021
 	 */
 	@Override
 	public CourierOfficeOutlet getOfficeInfo(int officeid) throws OutletNotFoundException {

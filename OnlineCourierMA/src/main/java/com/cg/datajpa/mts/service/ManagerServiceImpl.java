@@ -101,7 +101,7 @@ public class ManagerServiceImpl implements IManagerService {
 	/*
 	 * Method:getCourierStatus check status of any courier
 	 * 
-	 * CreatedBy:Venkatesh Murty CreatedDate:22 April 2021
+	 * CreatedBy:Pankaj Kumar Singh CreatedDate:22 April 2021
 	 */
 	@Override
 	public CourierStatus getCourierStatus(Courier courier) throws CourierNotFoundException {
@@ -117,7 +117,7 @@ public class ManagerServiceImpl implements IManagerService {
 	/*
 	 * Method:getRegistedComplaint show registerd complaint using complaint id
 	 * 
-	 * CreatedBy:Venkatesh Murty CreatedDate:22 April 2021
+	 * CreatedBy:Pankaj Kumar Singh CreatedDate:22 April 2021
 	 */
 	@Override
 	public Complaint getRegistedComplaint(int complaintid) throws ComplaintNotFoundException {
@@ -132,7 +132,7 @@ public class ManagerServiceImpl implements IManagerService {
 	/*
 	 * Method:getAllComplaint show all complaints in database
 	 * 
-	 * CreatedBy:Venkatesh Murty CreatedDate:22 April 2021
+	 * CreatedBy:Pankaj Kumar Singh CreatedDate:22 April 2021
 	 */
 	@Override
 	public List<Complaint> getAllComplaints() {
@@ -144,7 +144,7 @@ public class ManagerServiceImpl implements IManagerService {
 	/*
 	 * Method:getAllDeliveredCourier fetch all couriers which are delivered
 	 * 
-	 * CreatedBy:Venkatesh Murty CreatedDate:22 April 2021
+	 * CreatedBy:Pankaj Kumar Singh CreatedDate:22 April 2021
 	 */
 	public List<Courier> getAllDeliveredCouriers() {
 		List<Courier> deliveredCouriers;
