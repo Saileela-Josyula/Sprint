@@ -1,27 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-       <title>Help&Support</title> 
-       <link href=# rel="stylesheet" />
-        <link rel="stylesheet" 
-href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-       <style>
-        blink {
-            color: red;
-            font-size: 15px;
-            font-weight: bold;
-        }
-    </style>
-    <style>
-        body {
-          background-image:"download.jpg";
-        }
-        </style>
-    </head>
-<body>
+<link href="complaint.css" rel="stylesheet">
+<body >
     <div class="row greyspace">
         <div id="div1" class="col-xl-6">
             <img src="capgemini.png" alt="capgemini"  height=80px width="300px" id=logo > 
@@ -50,27 +32,31 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
              </ul>
         </div>
     </div>
-        <h1 style="background-color:cornflowerblue;text-align: center;">Help & Support</h1>
-<hr>
-<br>
-<p><b>This page helps solving your issues pertaining to the services provided by P&P Couriers.<br>Please follow the steps below :</b></p>
-<ol>
-    <li>Please check your network connectivity.You must have a stable network connectivity in order to experience smooth functioning of the website.</li>
-    <li>Try refreshing the page,if your issue pertains.Please dont refresh your page during payment.</li>
-    <li>If you have doubts about the services provided or on how to navigate and use these services,please click on the relavent service option below </li>
-</ol>
-<a href=# target="_blank"><blink>Click here!..If you have issues in sending a courier</blink></a>
-<br>
-<br>
-<a href=# target="_blank"><blink>Click here!..If you have issues in registering a complaint</blink></a>
-<br>
-<br>
-<a href=# target="_blank"><blink>Click here!..If you have issues in tracking your courier</blink></a>
-<br>
-<hr>
-<h4 style="color: rgb(70, 70, 179);"><b>Still facing issues???</b></h4>
-<p><b>Please contact us on:- <br>
-24/7 Help-line number<br>
-8971526565</b></p>
+    <div class="bg">
+    <form action="action_page.php">
+        <div class="container">
+          <h1>Register Complaint</h1>
+          <p>Please fill in this form to register a complaint.</p>
+          <hr>
+      
+          <label for="name"><b>Name</b></label>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" placeholder="Enter Name" name="name" id="name" required><br />
+
+          <label for="consNo"><b>Consignment Number</b></label>&nbsp;&nbsp;&nbsp;
+          <input type="text" placeholder="Enter Consignment Number" name="congmno" id="congmno" required><br />
+      
+          <label for="shrDes"><b>Short Description</b></label>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" placeholder=" " name="shrDes" id="shrDes" required><br />
+      
+          <label for="detailDes"><b>Detailed Description</b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" placeholder=" " name="detailDes" id="detailDes" required><br />
+          <hr>
+      
+          <button type="submit" class="registerbtn">Register</button>
+        </div>
+      </form>
+    </div>
 </body>
-</html>
